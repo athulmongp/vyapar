@@ -115,7 +115,6 @@
     left: 0;
     top: 10px;
     border-radius: 0 4px 4px 0px;
-    width: 35px;
     transition-delay: 0.3s;
     position: absolute;
     z-index: 9999; /* Ensure it's above other elements */
@@ -126,7 +125,7 @@
   /*----------------sidebar-wrapper----------------*/
   
   .sidebar-wrapper {
-    width: 260px;
+    width: 17vw;
     height: 100%;
     max-height: 100%;
     position: fixed;
@@ -513,6 +512,7 @@
       background-color: #333; /* Set the background color */
       border-bottom: 2px solid #555; /* Add a border at the bottom */
       height: 4.5rem;
+      z-index: 1000; /* Adjust the value as needed */
   }
 
   /* Style the navbar buttons */
@@ -521,22 +521,21 @@
   }
 
   #addsale{
-    margin-left: 46.5rem;
     background: #990012;
     color: white;
-    border-radius: 20px
+    border-radius: 20px;
   }
 
   #addproduct{
     background: #0000a5;
     color: white;
-    border-radius: 20px
+    border-radius: 20px;
   }
 
   #addmore{
     background: white;
     color: #0050ff;
-    border-radius: 20px
+    border-radius: 20px;
   }
 
   /* Style the dropdown button */
@@ -597,17 +596,17 @@
       <div class="sidebar-content">
         <div class="sidebar-header">
         <h1 class="text-center" style="font-size: 18px; color: white;">
-          <a href="{% url "homepage" %}">
-            <b class="text-white">VYAPAR</b>
+          <a href="#">
+            <b class="text-white" style="font-size: 18px; color: white;">VYAPAR</b>
           </a>
         </h1>
 
           {% comment %} <div id="close-sidebar" style="float: right; margin-top: -2rem;">
             <i class="fas fa-angle-double-left"></i>
             <i class="fas fa-times"></i>
-          </div> {% endcomment %}
+          </div>
           <!-- Add a button to partially close the sidebar -->
-          {% comment %} <div id="partial-close-sidebar" class="btn btn-sm btn-dark" style="float: right; margin-top: -2rem;">
+          <div id="partial-close-sidebar" class="btn btn-sm btn-dark" style="float: right; margin-top: -2rem;">
             <i class="fas fa-angle-double-left"></i>
           </div> {% endcomment %}
         </div>
@@ -652,32 +651,32 @@
               <div class="sidebar-submenu">
                 <ul>
                   <li>
-                    <a href="#"><b>Sale Invoices</b>
+                    <a href="{% url "sale_invoices" %}"><b>Sale Invoices</b>
                       <i class="fa fa-plus"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#"><b>Estimate/ Quotation</b>
+                    <a href="{% url "estimate_quotation" %}"><b>Estimate/ Quotation</b>
                       <i class="fa fa-plus"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#"><b>Payment In</b>
+                    <a href="{% url "payment_in" %}"><b>Payment In</b>
                       <i class="fa fa-plus"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#"><b>Sale Order</b>
+                    <a href="{% url "sale_order" %}"><b>Sale Order</b>
                       <i class="fa fa-plus"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#"><b>Delivery Challan</b>
+                    <a href="{% url "delivery_chellan" %}"><b>Delivery Challan</b>
                       <i class="fa fa-plus"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="#"><b>Sale Return/ Cr. Note</b>
+                    <a href="{% url "sale_return_cr" %}"><b>Sale Return/ Cr. Note</b>
                       <i class="fa fa-plus"></i>
                     </a>
                   </li>
@@ -767,15 +766,10 @@
     </nav>
 
     
-    <nav class="navbar navbar-expand-lg navbar-light" style="background:  #455a81;">
-      <div class="container-fluid">
-        <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
+    <nav class="navbar navbar-expand-lg navbar-light" style="background:#455a81; position: fixed; margin-left: 16vw; width: 100%;"> 
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav"> <!-- Use ml-auto to push the buttons to the right -->
-            <li class="nav-item">
+          <ul class="navbar-nav mx-5 ms-auto"> <!-- Use me-auto to push the buttons to the right -->
+            <li class="nav-item" style="margin-left: 20vw;">
               <button class="btn me-2" id="addsale" type="button">
                 <i class="fa fa-plus"></i>
                 Add Sale
@@ -794,12 +788,13 @@
               </button>
             </li>
           </ul>
-          <div class="sidebar-header" style="margin-left: 11rem;">
+    
+          <div class="sidebar-header" style="margin-left: 8vw;">
             <div class="user-pic" style="height: 5px;">
               {% if company.profile_pic %}
-                <img class="img-xs rounded-circle" style="height: 35px;" src="{{ company.profile_pic.url }}" alt="">
+                <img class="img-xs rounded-circle" style="height: 40px; width: 40px;" src="{{ company.profile_pic.url }}" alt="">
               {% else %}
-                <img class="img-xs rounded-circle" style="height: 35px;" src="{% static 'images/default.jpg' %}" class="rounded-circle">
+                <img class="img-xs rounded-circle" style="height: 40px; width: 40px;" src="{% static 'images/default.jpg' %}" class="rounded-circle">
               {% endif %}
             </div>
             <div class="user-info" style="margin-left: 3rem;">
@@ -817,7 +812,7 @@
                   <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">
-                  <a href="#">Dashboard</a>
+                  <a href="{% url "homepage" %}">Dashboard</a>
                   <a href="{% url 'view_profile' %}">Profile</a>
                   <a href="{% url 'logout' %}">Logout</a>
                 </div>
@@ -825,8 +820,8 @@
             </div>
           </div>
         </div>
-      </div>
     </nav>
+    
 
     <main class="page-content" style="background-color: #E1E8EE;">
       

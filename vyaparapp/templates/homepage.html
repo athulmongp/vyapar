@@ -8,8 +8,8 @@
   .select-box {
     float: right;
     margin-right: 10px;
-    margin-top: 10px;
-    padding: 5px 10px; /* Add padding for better appearance */
+    margin-top: 1vh;
+    padding: 0.5vw 1vh; /* Add padding for better appearance */
     border: 1px solid #ccc; /* Add a border for a neat outline */
     border-radius: 5px; /* Round the corners */
     background-color: #fff; /* Set a background color */
@@ -32,28 +32,28 @@
   }
 
   .card1{
-    width: 32rem;
-    height: 20rem;
+    width: 32vw;
+    height: 20vh;
   }
 
   .card2{
-    width: 19rem;
-    height: 20rem;
+    width: 19vw;
+    height: 20vh;
   }
 
   .card3{
-    width: 17rem;
-    height: 15rem;
+    width: 17vw;
+    height: 17vh;
   }
 
   .card4{
-    width: 17rem;
-    height: 15rem;
+    width: 17vw;
+    height: 17vh;
   }
 
   .card5{
-    width: 17rem;
-    height: 15rem;
+    width: 17vw;
+    height: 17vh;
   }
 
   .grid-item{
@@ -68,6 +68,7 @@
     top: 0;
     right: 0;
     height: 100%;
+    width: 22vw;
     overflow-y: auto; /* Enable vertical scrolling */
     background-color: white;
     color: white;
@@ -98,25 +99,14 @@
     display: inline-block;
     width: 50px;
     height: 26px;
+    background: lightblue;
+    border-radius: 20px;
   }
   
   .small-switch input {
     display: none;
-    padding: 10px;
+    padding: 1rem;
   }
-  
-  .slider1 {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: 0.4s;
-    border-radius: 26px;
-  }
-  
   .slider1:before {
     position: absolute;
     content: "";
@@ -239,9 +229,9 @@
   
 </style>
 
-<div class="container-fluid">     
-  <div class="row pt-5" style="width: 78rem;">
-    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">          
+<div class="container-fluid" style="width: 78vw; margin-top: 3.5rem; height: 40.5rem; margin-left: -2rem;">     
+  <div class="row pt-5">
+    <div class="col-4">          
       <div class="card1 rounded-0 p-0 shadow-sm">
         <select name="" id="" class="select-box">
           <option value="This month" selected>This month</option>
@@ -250,32 +240,32 @@
           <option value="This Year">This Year</option>
         </select>        
         <div class="grid-item">
-          <h4 style="margin-left: 25px; padding-top: 15px;">
+          <h4 style="margin-left: 2.5rem; padding-top: 1.5rem;">
             <i class="fa fa-tachometer-alt" style="color: darkorange;"></i>
             <span class="menu-icon"> 
               <b>Sale</b>
             </span>
           </h4><br>
-          <svg width="50%" style="margin-left: 14rem; margin-top: 6rem;" viewBox="0 0 1000 200" preserveAspectRatio="xMinYMin meet" style="background-color: black;">
+          <svg width="15vw" style="margin-left: 14vw; margin-top: 6vh;" viewBox="0 0 1000 200" preserveAspectRatio="xMinYMin meet" style="background-color: black;">
             {% comment %} <path d="M0 100 C100 150, 150 80, 300 150 S450 80, 500 150 S650 80, 700 100 S800 150, 1000 100" fill="transparent" stroke="green" stroke-width="5" /> {% endcomment %}
             <path d="M0 100 100 100, 150 100, 300 100 S100 100, 400 100 S100 100, 600 100 S100 100, 1200 100 S100 100" fill="transparent" stroke="green" stroke-width="15" />
           </svg>
-          <h4 style="margin-left: 25px; margin-top: -7rem; font-size: 29px;">
+          <h4 style="margin-left: 2.5rem; margin-top: -7rem; font-size: 29px;">
             <i class="fa fa-rupee-sign"></i>
             <span style="font-size: 34px;">  
               00</span>.00
           </h4>
-          <p style="font-size: 20px; color: #a9a9a9;; margin-left: 25px;">
+          <p style="font-size: 20px; color: #a9a9a9;; margin-left: 2.5rem;">
             Total Sale (Sep)
           </p>
-          <p style="font-size: 18px; color: orange; margin-left: 25px; margin-top: 2rem;">
+          <p style="font-size: 18px; color: orange; margin-left: 2.5rem; margin-top: 2rem;">
             <i class="fa fa-arrow-down"></i>
             100 %
           </p>
-          <p style="font-size: px; color: #a9a9a9; margin-left: 25px; margin-top: -1rem;">
+          <p style="font-size: px; color: #a9a9a9; margin-left: 2.5rem; margin-top: -1rem;">
             This month growth
           </p>
-          <p style="color: #a9a9a9; margin-left: 15.1rem; margin-top: 1rem;">
+          <p style="color: #a9a9a9; margin-left: 15.1vw; margin-top: 1vh;">
             Report: From 01 Sep to 30 Sep
           </p>
 
@@ -284,7 +274,7 @@
     </div>
 
 
-    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" style="margin-left: 8rem;">          
+    <div class="col-4" style="margin-left: 8vw;">          
       <div class="card2 rounded-0 pb-0 shadow-sm">
         <select name="" id="" class="select-box">
           <option value="This month" selected>This month</option>
@@ -293,7 +283,7 @@
           <option value="This Year">This Year</option>
         </select>        
         <div class="grid-item">
-          <h5 style="margin-left: 25px; padding-top: 15px;">
+          <h5 style="margin-left: 2.5rem; padding-top: 1.5rem;">
             <i class="fa fa-wallet" style="color: violet;"></i>
             <span class="menu-icon"> 
               Expenses
@@ -308,7 +298,7 @@
             <span style="font-size: 25px;">  
               00</span>.00
           </h4>
-          <p style="color: #a9a9a9; margin-left: 3rem; margin-top: 10rem;">
+          <p style="color: #a9a9a9; margin-left: 2.9rem; margin-top: 9.5rem;">
             Report: From 01 Sep to 30 Sep
           </p>
         </div>      
@@ -316,11 +306,11 @@
     </div>
   </div>
 
-  <div class="row pt-4">
-    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">          
+  <div class="row pt-4" style="margin-top: 11rem;">
+    <div class="col">          
       <div class="card3 rounded-0 pb-0 shadow-sm">     
         <div class="grid-item"  style="height: 15rem;">
-          <h5 style="margin-left: 25px; padding-top: 15px;">
+          <h5 style="margin-left: 2.5rem; padding-top: 1.5rem;">
             <i class="fa fa-arrow-down" style="color: lightgreen;"></i>
             <span class="menu-icon"> 
               You'll Receive
@@ -331,7 +321,7 @@
             <span style="font-size: 25px;">  
               00</span>.00
           </h4>
-          <p style="color: #a9a9a9; margin-left: 1.7rem; margin-top: 2rem;">
+          {% comment %} <p style="color: #a9a9a9; margin-left: 1.7rem; margin-top: 2rem;">
             <b>Name</b> <span style="color: lightgreen; margin-left: 8rem;"><b>00</b></span>
           </p>
           <p style="color: #a9a9a9; margin-left: 1.7rem;">
@@ -339,15 +329,22 @@
           </p>
           <p style="color: #a9a9a9; margin-left: 1.7rem;">
             <b>Name</b> <span style="color: lightgreen; margin-left: 8rem;"><b>00</b></span>
+          </p> {% endcomment %}
+          <svg width="70%" style="margin-left: 2.5rem; margin-top: 2rem;" viewBox="0 0 1000 200" preserveAspectRatio="xMinYMin meet" style="background-color: black;">
+            {% comment %} <path d="M0 100 C100 150, 150 80, 300 150 S450 80, 500 150 S650 80, 700 100 S800 150, 1000 100" fill="transparent" stroke="green" stroke-width="5" /> {% endcomment %}
+            <path d="M0 100 100 100, 150 100, 300 100 S100 100, 400 100 S100 100, 600 100 S100 100, 1000 100 S100 100" fill="transparent" stroke="green" stroke-width="15" />
+          </svg>
+          <p style="color: #a9a9a9; margin-left: 2.3rem; margin-top: 2.5rem;">
+            Report: From 01 Sep to 30 Sep
           </p>
         </div>      
       </div>          
     </div>
 
-    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">          
-      <div class="card4 rounded-0 pb-0 shadow-sm" style="margin-left: -7.7rem;">      
-        <div class="grid-item"  style="height: 15rem; width: 17rem;">
-          <h5 style="margin-left: 25px; padding-top: 15px;">
+    <div class="col">          
+      <div class="card4 rounded-0 pb-0 shadow-sm" style="margin-left: -8vw;">      
+        <div class="grid-item"  style="height: 15rem;">
+          <h5 style="margin-left: 2.5rem; padding-top: 1.5rem;">
             <i class="fa fa-arrow-up" style="color: orange;"></i>
             <span class="menu-icon"> 
               You'll Pay
@@ -358,7 +355,7 @@
             <span style="font-size: 25px;">  
               00</span>.00
           </h4>
-          <p style="color: #a9a9a9; margin-left: 1.7rem; margin-top: 2rem;">
+          {% comment %} <p style="color: #a9a9a9; margin-left: 1.7rem; margin-top: 2rem;">
             <b>Name</b> <span style="color: orange; margin-left: 8rem;"><b>00</b></span>
           </p>
           <p style="color: #a9a9a9; margin-left: 1.7rem;">
@@ -366,20 +363,27 @@
           </p>
           <p style="color: #a9a9a9; margin-left: 1.7rem;">
             <b>Name</b> <span style="color: orange; margin-left: 8rem;"><b>00</b></span>
+          </p> {% endcomment %}
+          <svg width="70%" style="margin-left: 2.5rem; margin-top: 2rem;" viewBox="0 0 1000 200" preserveAspectRatio="xMinYMin meet" style="background-color: black;">
+            {% comment %} <path d="M0 100 C100 150, 150 80, 300 150 S450 80, 500 150 S650 80, 700 100 S800 150, 1000 100" fill="transparent" stroke="green" stroke-width="5" /> {% endcomment %}
+            <path d="M0 100 100 100, 150 100, 300 100 S100 100, 400 100 S100 100, 600 100 S100 100, 1000 100 S100 100" fill="transparent" stroke="green" stroke-width="15" />
+          </svg>
+          <p style="color: #a9a9a9; margin-left: 2.3rem; margin-top: 2.5rem;">
+            Report: From 01 Sep to 30 Sep
           </p>
         </div>      
       </div>          
     </div>
 
-    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">          
-      <div class="card5 rounded-0 pb-0 shadow-sm" style="margin-left: -15.5rem;">
+    <div class="col">          
+      <div class="card5 rounded-0 pb-0 shadow-sm" style="margin-left: -16vw;">
         <select name="" id="" class="select-box" style="padding: 5px 5px;">
           <option value="This month" selected>This month</option>
           <option value="Last month">Last month</option>
           <option value="This Quarter">This Quarter</option>
           <option value="This Year">This Year</option>
         </select>        
-        <div class="grid-item" style="height: 15rem; width: 17rem;">
+        <div class="grid-item" style="height: 15rem;">
           <h5 style="margin-left: 25px; padding-top: 15px;">
             <i class="fa fa-shopping-cart" style="color: lightblue;"></i>
             <span class="menu-icon"> 
@@ -400,12 +404,12 @@
   </div>
 
   <!-- Right sidebar -->
-  <div class="sidebar1" style="width: 21rem; margin-top: 6.3rem; height: 37.65rem;">
+  <div class="sidebar1" style="margin-top: 6.3rem; height: 37.65rem;">
     <!-- Add 5 fieldsets -->
     <div class="privacy text-white" style="height: 5rem; padding-top: 10px; border-radius: 250px;">
       <h6 style="margin-left: 1rem; padding-top: 10px;">Privacy</h6>
       <!-- Add a small slider switch to the right of Privacy -->
-      <label class="small-switch" style="margin-left: 12rem;  margin-top: -20px;">
+      <label class="small-switch" style="margin-left: 12vw;  margin-top: -20px;">
         <input type="checkbox">
         <span class="slider1 round"></span>
       </label>

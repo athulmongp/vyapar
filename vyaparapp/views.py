@@ -65,7 +65,11 @@ def login(request):
       return redirect('log')
     
 def homepage(request):
-  return render(request, 'homepage.html')
+  company =  company_details.objects.get(user = request.user)
+  context = {
+              'company' : company
+          }
+  return render(request, 'homepage.html', context)
 
 # @login_required(login_url='login')
 def logout(request):
@@ -110,9 +114,24 @@ def edit_profile(request,pk):
   context = {
       'company' : company,
       'user1' : user1,
-  }
-  
+  } 
   return render(request,'edit_profile.html',context)
+
+
+def sale_invoices(request):
+  return render(request, 'sale_invoices.html')
+
+def estimate_quotation(request):
+  return render(request, 'estimate_quotation.html')
+
+def payment_in(request):
+  return render(request, 'payment_in.html')
     
-    
-    
+def sale_order(request):
+  return render(request, 'sale_order.html')
+
+def delivery_chellan(request):
+  return render(request, 'delivery_chellan.html')
+
+def sale_return_cr(request):
+  return render(request, 'sale_return_cr.html')
