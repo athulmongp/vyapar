@@ -4,6 +4,8 @@ from django.contrib.auth.models import User, auth
 from django.utils.text import capfirst
 from django.contrib import messages
 from . models import *
+import json
+from django.http.response import JsonResponse
 
 # Create your views here.
 def home(request):
@@ -135,3 +137,23 @@ def delivery_chellan(request):
 
 def sale_return_cr(request):
   return render(request, 'sale_return_cr.html')
+
+
+# created by athul
+def settings(request):
+  company =  company_details.objects.get(user = request.user)
+  context = {
+              'company' : company
+          }
+  return render(request, 'settings.html',context)
+
+def hide_options(request):
+    
+    company =  company_details.objects.get(user = request.user)
+    if request.method == 'POST':
+        selected_options = list(request.POST.getlist('selected_options'))
+
+    request.session['selected_options'] = selected_options
+    context = {'selected_options': json.dumps(selected_options),
+               'company' : company}
+    return render(request,"settings.html",context)

@@ -37,7 +37,7 @@
   }
 
   .card2{
-    width: 19vw;
+    width: 23vw;
     height: 20vh;
   }
 
@@ -52,7 +52,7 @@
   }
 
   .card5{
-    width: 17vw;
+    width: 20vw;
     height: 17vh;
   }
 
@@ -226,12 +226,51 @@
   .bank-accounts td:first-child {
     font-weight: bold; /* Make the first column bold */
   }
+  @media (max-width: 768px) {
+    .card1{
+      width: 100%;
+      margin-left: 10%;
+
+    }
+    .card2{
+      width: 110%;
+      margin-left: 1;
+      margin-top: 100%;
+
+    }
+    .card3{
+      width: 100%;
+      margin-left: 10%;
+      margin-top: 10%;
+      
+
+    }
+    .card4{
+      width: 120%;
+      padding-left: 22%;
+      margin-top: 60%;
+
+    }
+    .card5{
+      width: 130%;
+      padding-left: 35%;
+      margin-top: 60%;
+
+    }
+    .card1 h4{
+      
+      font-size: 20px;
+      margin-bottom: 40px;
+
+    }
+
+  }
   
 </style>
 
 <div class="container-fluid" style="width: 78vw; margin-top: 3.5rem; height: 40.5rem; margin-left: -2rem;">     
   <div class="row pt-5">
-    <div class="col-4">          
+    <div class="col-md-4">          
       <div class="card1 rounded-0 p-0 shadow-sm">
         <select name="" id="" class="select-box">
           <option value="This month" selected>This month</option>
@@ -250,9 +289,9 @@
             {% comment %} <path d="M0 100 C100 150, 150 80, 300 150 S450 80, 500 150 S650 80, 700 100 S800 150, 1000 100" fill="transparent" stroke="green" stroke-width="5" /> {% endcomment %}
             <path d="M0 100 100 100, 150 100, 300 100 S100 100, 400 100 S100 100, 600 100 S100 100, 1200 100 S100 100" fill="transparent" stroke="green" stroke-width="15" />
           </svg>
-          <h4 style="margin-left: 2.5rem; margin-top: -7rem; font-size: 29px;">
+          <h4 style="margin-left: 2.5rem; margin-top: -7rem; font-size: 29px;" id="h4">
             <i class="fa fa-rupee-sign"></i>
-            <span style="font-size: 34px;">  
+            <span style="font-size: 34px;" id="s1">  
               00</span>.00
           </h4>
           <p style="font-size: 20px; color: #a9a9a9;; margin-left: 2.5rem;">
@@ -274,7 +313,7 @@
     </div>
 
 
-    <div class="col-4" style="margin-left: 8vw;">          
+    <div class="col-md-4" style="margin-left: 8vw;">          
       <div class="card2 rounded-0 pb-0 shadow-sm">
         <select name="" id="" class="select-box">
           <option value="This month" selected>This month</option>
@@ -307,7 +346,7 @@
   </div>
 
   <div class="row pt-4" style="margin-top: 11rem;">
-    <div class="col">          
+    <div class="col-md-4">          
       <div class="card3 rounded-0 pb-0 shadow-sm">     
         <div class="grid-item"  style="height: 15rem;">
           <h5 style="margin-left: 2.5rem; padding-top: 1.5rem;">
@@ -341,7 +380,7 @@
       </div>          
     </div>
 
-    <div class="col">          
+    <div class="col-md-4">          
       <div class="card4 rounded-0 pb-0 shadow-sm" style="margin-left: -8vw;">      
         <div class="grid-item"  style="height: 15rem;">
           <h5 style="margin-left: 2.5rem; padding-top: 1.5rem;">
@@ -375,7 +414,7 @@
       </div>          
     </div>
 
-    <div class="col">          
+    <div class="col-md-4">          
       <div class="card5 rounded-0 pb-0 shadow-sm" style="margin-left: -16vw;">
         <select name="" id="" class="select-box" style="padding: 5px 5px;">
           <option value="This month" selected>This month</option>

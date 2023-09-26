@@ -20,6 +20,10 @@ urlpatterns = [
     path('sale_order', views.sale_order, name='sale_order'),
     path('delivery_chellan', views.delivery_chellan, name='delivery_chellan'),
     path('sale_return_cr', views.sale_return_cr, name='sale_return_cr'),
+
+    # created by athul
+    path('settings', views.settings, name='settings'),
+    path('hide_options', views.hide_options, name='hide_options'),
     
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     
