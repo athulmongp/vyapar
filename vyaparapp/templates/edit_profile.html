@@ -1,3 +1,5 @@
+<!-- update by athul -->
+
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
@@ -20,7 +22,7 @@
       
       width: 900px; 
       margin-left: 100px;
-      background-color: rgb(32, 35, 37);
+      background-color: #455a81;
       border-radius: 20px;
       z-index: 2 !important;
   }
@@ -259,8 +261,9 @@ width: 700px;
                           <tr>
                             <td>
                               <div class="mb-3 mt-3" style="margin-left: 5rem;">
+                                <p style=" color:azure ; margin-bottom: 0px;">previous:</p>
                                 {% if company.profile_pic %}
-                                  <img src="{{ company.profile_pic.url }}" style=" width :50px;height: 50px;">
+                                  <img src="{{ company.profile_pic.url }}" style="width :100px; height: 100px;">
                                 {% endif %}
                                 <input type="file" name = 'file' class="form-control" >
                               </div>
@@ -269,7 +272,7 @@ width: 700px;
                         </tbody>
                       </table>
       
-                      <button type="submit" class="btn btn-outline-dark align-center font-weight-bold mt-2" style="color: white; margin: 5rem 18rem; background-color: rgb(218, 164, 48);"> SAVE CHANGES</button>
+                      <button type="submit" class="btn btn-outline-dark btn-danger align-center font-weight-bold mt-2" style="color: white; margin: 5rem 18rem; background-color: red;width: 30%;border-radius: 10px;"> SAVE CHANGES</button>
                              
                 </form>
           </div>
