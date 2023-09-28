@@ -22,6 +22,16 @@
             #btn{
                 width: 60% !important;
             }
+            .container{
+                margin: 10px;
+                margin-right: 10px;
+                width: 100%;
+            }
+            .container .btn{
+                width: 100%;
+                padding: 40px;
+
+            }
 
          }
     </style>
@@ -133,6 +143,16 @@
         
         <center><input type="submit" id="btn" value="Update Options" class="btn btn-danger mt-5 mb-5" style="padding: 10px;width: 30%;border-radius: 10px;font-weight: bold;"></center>
     </form>
+    <div class="container" style="background-color: #455a81;border-radius: 10px; padding: 10px;">
+        <h1 style="text-align: center;margin-bottom: 20px;text-shadow: 2px 2px 4px #000000;color: white; margin-top: 10px; padding-top: 10px;font-weight: bold">BACK UP</h1>
+        <hr style="background-color: aliceblue;">
+        <input type="checkbox" style="margin-left: 10%;">
+        <label for="" style="color: white;font-size: 1.5em;">Auto Backup</label><br>
+        <button class="btn btn-danger" style="margin-left: 10%;margin-top: 10px;margin-bottom: 10px;width: 20%;padding: 8px;font-weight: bold;border-radius: 10px;">Back Up Now</button>
+        <h5 style="color: white;margin-left: 40%;">Last backup: 28-09-2023</h5>
+
+
+    </div>
 
     <script>
         // Function to save checkbox state in local storage

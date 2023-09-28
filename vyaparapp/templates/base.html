@@ -19,6 +19,21 @@
 
   <!-- Font Awesome CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script> -->
+</head>
 </head>
 
 <style>
@@ -657,9 +672,40 @@
       padding-left: 0px;
 
     }
+    .sidebar-wrapper .sidebar-menu{
+      margin-top: 10px;
+    }
+    .sidebar-header .user-pic {
+      height: 10px;
+       width: 10px;
+       margin-top: 0px;
+       padding-left: 10px;
+       padding-top: 0px;
+       
+       
+    }
+    .sidebar-header .user-info .user-name{
+      visibility: hidden;
+      font-size: 1px;
+    }
+    .sidebar-header .dropbtn{
+      width: 10%;
+      height: 10%;
+      background-color: transparent;
+    }
+    .sidebar-header .collapse .nav-item{
+      background-color: white;
+      align-items: center;
 
 
-  }
+    }.sidebar-header .collapse .nav-item .btn{
+      align-content: center;
+
+    }
+   
+
+
+  } 
 
   #myList.active {
     margin-left: -250px;
@@ -845,7 +891,9 @@
         </a>
 
       </h1>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      
+      
+      <div class="collapse navbar-collapse " id="navbarNav" style="float: left;">
 
         <ul class="navbar-nav mx-5 ms-auto"> <!-- Use me-auto to push the buttons to the right -->
           <li class="nav-item" style="margin-left: 20vw;">
@@ -868,8 +916,9 @@
           </li>
 
         </ul>
+       
         <button class="btn me-2 text-white" type="button" style="margin-left: 100px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bell-fill"
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="22" fill="currentColor" class="bi bi-bell-fill"
             viewBox="0 0 16 16">
             <path
               d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
@@ -877,13 +926,19 @@
         </button>
         <button class="btn me-2 text-white" type="button">
           <a class="text-white" href="{% url 'settings' %}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-gear-fill"
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="22" fill="currentColor" class="bi bi-gear-fill"
               viewBox="0 0 16 16">
               <path
                 d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
             </svg>
           </a>
         </button>
+
+      </div> 
+      <button class="navbar-toggler" type="button" role="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fa fa-list mobile-nav-toggle text-white"></i>
+    </button>    
         <!-- style="margin-left: 16vw;" -->
         <div class="sidebar-header" style="margin-left: 20px;">
           <div class="user-pic" style="height: 8px;">
@@ -917,7 +972,7 @@
             </div>
           </div>
         </div>
-      </div>
+      
     </nav>
 
 

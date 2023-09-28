@@ -2,6 +2,12 @@
 {% block content %}
 {% load static %}
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
 <style>
 	@import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 
@@ -49,7 +55,7 @@
 
 		.signup {
 			position: absolute;
-			top: 40%;
+			top: 45%;
 			left: 50%;
 			-webkit-transform: translate(-50%, -50%);
 			width: 65%;
@@ -58,12 +64,12 @@
 
 
 			&.slide-up {
-				top: 3%;
+				top: 6%;
 				-webkit-transform: translate(-50%, 0%);
 				-webkit-transition: all .3s ease;
 				border-radius: 100%;
 			}
-			
+
 
 			&.slide-up .form-holder,
 			&.slide-up .submit-btn {
@@ -127,7 +133,7 @@
 					}
 				}
 
-				
+
 			}
 
 			.submit-btn {
@@ -156,13 +162,15 @@
 		.login {
 
 			position: absolute;
-			top: 10%;
+			top: 13%;
 			left: 0;
 			right: 0;
 			bottom: 0;
 			background-color: #fff;
 			z-index: 5;
 			-webkit-transition: all .3s ease;
+
+			background-color: #455a81;
 
 
 			&::before {
@@ -171,19 +179,21 @@
 				left: 50%;
 				top: -10px;
 				-webkit-transform: translate(-50%, 0);
-				background-color: #fff;
+				background-color: transparent;
 				width: 200%;
 				height: 250px;
 				border-radius: 50%;
 				z-index: 4;
 				-webkit-transition: all .3s ease;
+
 			}
 
 			.center {
 				position: absolute;
 				top: 40%;
 				left: 50%;
-				
+
+
 				-webkit-transform: translate(-50%, -50%);
 				width: 65%;
 				z-index: 5;
@@ -294,17 +304,9 @@
 			}
 		}
 	}
-	@media only screen and (max-width: 768px) {
-					
-		.signup img {
-			display: none;
-		}
-
-
-	}
 </style>
 
-<div class="container">
+<!-- <div class="container">
 	{% for message in messages %}
 	<h5>
 		<div class="alert alert-danger mt-5" style="width: 50%;">
@@ -312,63 +314,68 @@
 		</div>
 	</h5>
 	{% endfor %}
-</div>
+</div> -->
 
 <div class="form-structor">
-	<div class="signup">
+	<div class="signup ">
 		<a href="{% url 'log' %}" style="text-decoration: none;">
-			<h2 class="form-title"  id="signup"><b>SIGN UP</b></h2>
+			<h2 class="form-title" id="signup"><b>SIGN UP</b></h2>
 		</a>
+
 		<div class="row"
 			style="display: flex;box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.9), 0 6px 20px 0 rgba(0, 0, 0, 0.9);">
-			<div class="col-md-5" style="display: flex;">
-				<img src="{% static 'images/reg1.webp' %}" alt=""
-					style="width: 500px;height: 500px;border-top-left-radius:10px ;border-bottom-left-radius: 10px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;">
+			<div class="col-md-6 d-flex justify-content-center  flex-column  " style="width: 100%;">
+				<!-- <div class="container-fluid"> -->
+					<img class="img-fluid" src="{% static 'images/reg1.webp' %}" alt=""
+					style="height: 500px;border-top-left-radius:10px ;border-bottom-left-radius: 10px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;">
+					
+				<!-- </div> -->
 			</div>
-			<div class="col-md-5">
+			<div class="col-md-6 " style="width: 100%;">
 				<div class="form-holder"
-					style="width: 500px;height: 500px; border-top-right-radius:10px ;border-bottom-right-radius: 10px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;">
-					<form class="form sign-up p-2 mt-3" action="{% url 'register_user' %}" method="post"
+					style="width: 100%;height: 500px; border-top-right-radius:10px ;border-bottom-right-radius: 10px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;">
+					<!-- <div class="container-fluid"> -->
+						<form class="form sign-up p-2 mt-3" action="{% url 'register_user' %}" method="post"
 						autocomplete="off">
 						{% csrf_token %}
 
 						<label>
-							<input type="text" class="input" name="fname" id="first-name" class="input-text"
-								placeholder="First Name"
+							<input type="text" class="input" name="fname" id="first-name"
+								class="form-control form-control-lg fs-6" placeholder="First Name"
 								style=" border: 1px solid black; padding: 20px;background-color: rgba(178, 231, 241, 0.4);margin-top: 30px; margin-bottom: 10px;width: 80%;margin-left: 10%; border-radius: 10px;"
 								required>
 						</label>
 
 						<label>
-							<input type="text" class="input" name="lname" id="last-name" class="input-text"
+							<input type="text" class="input" name="lname" id="last-name" class="form-control"
 								placeholder="Last Name"
 								style="border: 1px solid black;padding: 20px;background-color: rgba(178, 231, 241, 0.4);margin-top: 10px; margin-bottom: 10px;width: 80%;margin-left: 10%; border-radius: 10px;"
 								required>
 						</label>
 
 						<label>
-							<input type="text" class="input" name="uname" id="uname" class="input-text"
+							<input type="text" class="input" name="uname" id="uname" class="form-control"
 								placeholder="User Name"
 								style="border: 1px solid black;padding: 20px;background-color: rgba(178, 231, 241, 0.4);margin-top: 10px; margin-bottom: 10px;width: 80%;margin-left: 10%; border-radius: 10px;"
 								required>
 						</label>
 
 						<label>
-							<input type="text" class="input" name="email" id="your-email" class="input-text"
+							<input type="text" class="input" name="email" id="your-email" class="form-control"
 								placeholder="Email Address"
 								style="border: 1px solid black;padding: 20px;background-color: rgba(178, 231, 241, 0.4);margin-top: 10px; margin-bottom: 10px;width: 80%;margin-left: 10%; border-radius: 10px;"
 								required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
 						</label>
 
 						<label>
-							<input type="text" class="input" name="phone" id="phone" class="input-text"
+							<input type="text" class="input" name="phone" id="phone" class="form-control"
 								placeholder="Contact Number"
 								style="border: 1px solid black;padding: 20px;background-color: rgba(178, 231, 241, 0.4);margin-top: 10px; margin-bottom: 10px;width: 80%;margin-left: 10%; border-radius: 10px;"
 								required>
 						</label>
 
 						<label>
-							<input type="password" class="input" name="password" id="password" class="input-text"
+							<input type="password" class="input" name="password" id="password" class="form-control"
 								placeholder="Password"
 								style="border: 1px solid black;padding: 20px;background-color: rgba(178, 231, 241, 0.4);margin-top: 10px; margin-bottom: 10px;width: 80%;margin-left: 10%; border-radius: 10px;"
 								required>
@@ -376,7 +383,7 @@
 
 						<label>
 							<input type="password" class="input" name="cpassword" id="comfirm-password"
-								class="input-text"
+								class="form-control"
 								style="border: 1px solid black;padding: 20px;background-color: rgba(178, 231, 241, 0.4);margin-top: 10px; margin-bottom: 10px;width: 80%;margin-left: 10%; border-radius: 10px;"
 								placeholder="Comfirm Password" required>
 						</label>
@@ -385,62 +392,67 @@
 							style="background: #455a81;color:white;font-size: large; width: 60%;"><b>Sign up</b>
 						</button>
 					</form>
-				</div>
-			</div>
-		</div>
-
-		<div style="margin-top: 20px;text-align: center;color: #455a81;" >
-			<svg xmlns="http://www.w3.org/2000/svg" width="34" height="35" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
-				<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
-			  </svg>
-		</div>
-	</div>
-
-
-	<div class="login slide-up" style=" box-shadow: 16px 6px 8px 16px rgba(0, 0, 0, 0.9), 16px 6px 20px 16px rgba(0, 0, 0, 0.9);border: 3px solid black;">
-		<div class="center">
-			<h2 class="form-title " id="login" style="color: #455a81 ;">LOG IN</h2>
-			<div class="row"
-				style="display: flex;background-color: rgba(92, 223, 246, 0.3);margin-bottom: 20px;display: flex;box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.9), 0 6px 20px 0 rgba(0, 0, 0, 0.9);">
-				<div class="col-md-5" style="display: flex;">
-					<img src="{% static 'images/log1.webp'%}" alt=""
-						style="width: 450px;height: 400px;border-top-left-radius:10px ;border-bottom-left-radius: 10px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;">
-				</div>
-				<div class="col-md-5"
-					style="width: 450px;height: 400px; border-top-right-radius:100px ;border-bottom-right-radius: 10px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;">
-					<div class="form-holder">
-						<form class="form sign-in" action="{% url 'login' %}" method="post" autocomplete="off">
-							{% csrf_token %}
-
-							<label>
-								<input type="text" class="input" name="username" id="your-email" class="input-text"
-									placeholder="Username"
-									style="border: 1px solid black; padding: 25px;background-color: rgba(254, 254, 253);margin-top: 20px; margin-bottom: 20px;width: 80%;margin-left: 10%; border-radius: 50px;"
-									required>
-							</label>
-
-							<label>
-								<input type="password"
-									style="border: 1px solid black;padding: 25px;background-color: rgba(250, 249, 249);margin-top: 10px; margin-bottom: 20px;width: 80%;margin-left: 10%; border-radius: 50px;"
-									class="input" name="password" id="password" class="input-text"
-									placeholder="Password" required>
-							</label>
-
-							<button type="submit" class="submit-btn" name="login" class="register"
-								style="background: #455a81;width: 50%; margin-top: 30px;font-weight: bold;font-size: 15px;">Log
-								in</button>
-
-							<div class="col-md-8 pt-4  text-center">
-								<a href="/forgotpassword" class="text-warning"
-									style="text-decoration: none;margin-left: 150px;">Forgot
-									Password?</a>
-							</div>
-						</form>
-					</div>
+					<!-- </div> -->
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<div style="margin-top: 20px;text-align: center;color: #455a81;">
+		<svg xmlns="http://www.w3.org/2000/svg" width="34" height="35" fill="currentColor"
+			class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+			<path
+				d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+		</svg>
+	</div>
+</div>
+
+
+<div class="login slide-up"
+	style="background-color: 455a81; box-shadow: 16px 6px 8px 16px rgba(0, 0, 0, 0.9), 16px 6px 20px 16px rgba(0, 0, 0, 0.9);border: 3px solid black;border-top-right-radius: 100px;border-top-left-radius: 100px;">
+	<div class="center">
+		<h2 class="form-title " id="login" style="color: white ;">LOG IN</h2>
+		<div class="row"
+			style="display: flex;background-color: rgb(183, 242, 252);margin-bottom: 20px;display: flex;box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.9), 0 6px 20px 0 rgba(0, 0, 0, 0.9);">
+			<div class="col-md-5" style="display: flex;">
+				<img src="{% static 'images/log1.webp'%}" alt=""
+					style="width: 450px;height: 400px;border-top-left-radius:10px ;border-bottom-left-radius: 10px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;">
+			</div>
+			<div class="col-md-5"
+				style="width: 450px;height: 400px; border-top-right-radius:100px ;border-bottom-right-radius: 10px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;">
+				<div class="form-holder">
+					<form class="form sign-in" action="{% url 'login' %}" method="post" autocomplete="off">
+						{% csrf_token %}
+
+						<label>
+							<input type="text" class="input" name="username" id="your-email" class="input-text"
+								placeholder="Username"
+								style="border: 1px solid black; padding: 25px;background-color: rgba(254, 254, 253);margin-top: 20px; margin-bottom: 20px;width: 80%;margin-left: 10%; border-radius: 50px;"
+								required>
+						</label>
+
+						<label>
+							<input type="password"
+								style="border: 1px solid black;padding: 25px;background-color: rgba(250, 249, 249);margin-top: 10px; margin-bottom: 20px;width: 80%;margin-left: 10%; border-radius: 50px;"
+								class="input" name="password" id="password" class="input-text" placeholder="Password"
+								required>
+						</label>
+
+						<button type="submit" class="submit-btn" name="login" class="register"
+							style="background: #455a81;width: 50%; margin-top: 30px;font-weight: bold;font-size: 15px;">Log
+							in</button>
+
+						<div class="col-md-8 pt-4  text-center">
+							<a href="/forgotpassword" class="text-warning"
+								style="text-decoration: none;margin-left: 150px;">Forgot
+								Password?</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </div>
 
 
