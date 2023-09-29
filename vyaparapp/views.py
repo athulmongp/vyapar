@@ -80,14 +80,18 @@ def logout(request):
 
 def view_profile(request):
   company =  company_details.objects.get(user = request.user)
+  selected_options = request.session.get('selected_options', None)
+  
   context = {
-              'company' : company
+              'company' : company,
+              'selected_options': json.dumps(selected_options)
           }
   return render(request,'profile.html',context)
   
 def edit_profile(request,pk):
   company = company_details.objects.get(id = pk)
   user1 = User.objects.get(id = company.user_id)
+  selected_options = request.session.get('selected_options', None)
 
   if request.method == "POST":
 
@@ -116,6 +120,7 @@ def edit_profile(request,pk):
   context = {
       'company' : company,
       'user1' : user1,
+      'selected_options': json.dumps(selected_options)
   } 
   return render(request,'edit_profile.html',context)
 
@@ -142,8 +147,12 @@ def sale_return_cr(request):
 # created by athul
 def settings(request):
   company =  company_details.objects.get(user = request.user)
+  selected_options = request.session.get('selected_options', None)
+  
   context = {
-              'company' : company
+              'company' : company,
+              'selected_options': json.dumps(selected_options),
+              
           }
   return render(request, 'settings.html',context)
 
@@ -154,6 +163,8 @@ def hide_options(request):
         selected_options = list(request.POST.getlist('selected_options'))
 
     request.session['selected_options'] = selected_options
+    
     context = {'selected_options': json.dumps(selected_options),
                'company' : company}
-    return render(request,"settings.html",context)
+   
+    return render(request, 'homepage.html', context)
