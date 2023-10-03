@@ -25,6 +25,9 @@ urlpatterns = [
     path('settings', views.settings, name='settings'),
     path('hide_options', views.hide_options, name='hide_options'),
     
+    path('staff_register', views.staff_register, name='staff_register'),
+    path('staff_regaction', views.staff_regaction, name='staff_regaction'),
+    
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     
 ]

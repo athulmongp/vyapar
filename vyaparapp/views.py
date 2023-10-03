@@ -14,6 +14,7 @@ def home(request):
 def register_page(request):
   return render(request, 'register.html')
 
+
 def register(request):
   if request.method == 'POST':
     first_name = request.POST['fname']
@@ -51,7 +52,8 @@ def register(request):
         messages.info(request, 'Sorry, Email already exists')
         return redirect('log')
       
-      
+
+
 def login(request):
   if request.method == 'POST':
     user_name = request.POST['username']
@@ -65,6 +67,8 @@ def login(request):
       return redirect('homepage')
     else: 
       return redirect('log')
+    
+
     
 def homepage(request):
   company =  company_details.objects.get(user = request.user)
@@ -168,3 +172,41 @@ def hide_options(request):
                'company' : company}
    
     return render(request, 'homepage.html', context)
+
+# ------created by athul------
+
+def staff_register(request):
+  company=company_details.objects.all()
+
+  return render(request, 'staffreg.html',{'company':company})
+
+def staff_regaction(request):
+  if request.method == 'POST':
+    fn=request.POST['fname']
+    ln=request.POST['lname']
+    email=request.POST['eid']
+    un=request.POST['uname']
+    pas=request.POST['pass']
+    ph=request.POST['ph']
+    cid=request.POST['select']
+    company=company_details.objects.get(id=cid)
+    img=request.FILES.get('image')
+
+    if staff_details.objects.filter(user_name=un).exists():
+      print("1")
+      return redirect('staff_register')
+    elif staff_details.objects.filter(email=email).exists():
+      print("2")
+      return redirect('staff_register')
+    else:
+      
+      staff=staff_details(first_name=fn,last_name=ln,email=email,user_name=un,password=pas,contact=ph,img=img,company=company)
+      staff.save()
+      print("success")
+      return redirect('log')
+
+  else:
+    print(" error")
+    return redirect('staff_register')
+
+

@@ -543,6 +543,18 @@
           <li class="nav-item text-white ml-3 pl-2 pr-2 p-1.5 mt-2"><b><a href="#about" class="text-white">About Us</a></b></li>
           <li class="nav-item text-white ml-3 pl-2 pr-2 p-1.5 mt-2"><b><a href="#service" class="text-white">Services</a></b></li>
           <li class="nav-item text-white ml-3 pl-2 pr-2 p-1.5 mt-2"><b><a href="#contact" class="text-white">Contact Us</a></b></li>
+         <li class="nav-item ">
+          <div class="dropdown">
+            <button class="btn  dropdown-toggle ml-4 mt-1 mb-1 text-warning" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent;border-radius: 20px;border: 2px solid orange;">
+              <b class="text-warning"> Registration</b>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Company Registration</a>
+              <a class="dropdown-item" href="{% url 'staff_register' %}">Staff Registration</a>
+              <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+            </div>
+          </div>
+         </li>
 
           <li class="nav-item ">
             <a class="nav-link text-white ml-3 pl-2 pr-2 p-1.5 bg-warning" href="{% url 'log' %}"
