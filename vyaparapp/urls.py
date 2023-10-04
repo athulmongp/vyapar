@@ -8,7 +8,7 @@ from django.views.static import serve
 urlpatterns = [
     path('', views.home, name='home'),
     path('log', views.register_page, name='log'),
-    path('register_user', views.register, name='register_user'),
+    path('register', views.register, name='register'),
     path('login', views.login, name='login'),
     path('homepage', views.homepage, name='homepage'),
     path('logout', views.logout, name='logout'),
@@ -27,6 +27,8 @@ urlpatterns = [
     
     path('staff_register', views.staff_register, name='staff_register'),
     path('staff_regaction', views.staff_regaction, name='staff_regaction'),
+    path('company_reg', views.company_reg, name='company_reg'),
+    path('company_reg2', views.company_reg2, name='company_reg2'),
     
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     

@@ -15,42 +15,7 @@ def register_page(request):
   return render(request, 'register.html')
 
 
-def register(request):
-  if request.method == 'POST':
-    first_name = request.POST['fname']
-    last_name = request.POST['lname']
-    user_name = request.POST['uname']
-    email_id = request.POST['email']
-    mobile = request.POST['phone']
-    passw = request.POST['password']
-    c_passw = request.POST['cpassword']
-    
-    if passw == c_passw:
-      if User.objects.filter(username = user_name).exists():
-        messages.info(request, 'Sorry, Username already exists')
-        return redirect('log')
-      elif company_details.objects.filter(contact_number = mobile).exists():
-        messages.info(request, 'Sorry, Mobile Number already exists')
-        return redirect('log')
 
-      elif not User.objects.filter(email = email_id).exists():
-    
-        user_data = User.objects.create_user(first_name = first_name,
-                        last_name = last_name,
-                        username = user_name,
-                        email = email_id,
-                        password = passw)
-        user_data.save()
-        
-        data = User.objects.get(id = user_data.id)
-        cust_data = company_details(contact_number = mobile,
-                             user = data)
-        cust_data.save()
-        messages.success(request, 'Welcome'+ '' + data.first_name +' '+data.last_name + '' +'Please Login')
-        return redirect('log')
-      else:
-        messages.info(request, 'Sorry, Email already exists')
-        return redirect('log')
       
 
 
@@ -174,6 +139,49 @@ def hide_options(request):
     return render(request, 'homepage.html', context)
 
 # ------created by athul------
+
+def company_reg(request):
+  return render(request,'register.html')
+
+def register(request):
+  if request.method == 'POST':
+    first_name = request.POST['fname']
+    last_name = request.POST['lname']
+    user_name = request.POST['uname']
+    email_id = request.POST['eid']
+    mobile = request.POST['ph']
+    passw = request.POST['pass']
+    c_passw = request.POST['cpass']
+    
+    if passw == c_passw:
+      if User.objects.filter(username = user_name).exists():
+        messages.info(request, 'Sorry, Username already exists')
+        return redirect('company_reg')
+      elif company_details.objects.filter(contact_number = mobile).exists():
+        messages.info(request, 'Sorry, Mobile Number already exists')
+        return redirect('company_reg')
+
+      elif not User.objects.filter(email = email_id).exists():
+    
+        user_data = User.objects.create_user(first_name = first_name,
+                        last_name = last_name,
+                        username = user_name,
+                        email = email_id,
+                        password = passw)
+        user_data.save()
+        
+        data = User.objects.get(id = user_data.id)
+        cust_data = company_details(contact_number = mobile,
+                             user = data)
+        cust_data.save()
+        messages.success(request, 'Welcome'+ '' + data.first_name +' '+data.last_name + '' +'Please Login')
+        return redirect('company_reg2')
+      else:
+        messages.info(request, 'Sorry, Email already exists')
+        return redirect('company_reg')
+      
+def company_reg2(request):
+  return render(request,'register2.html')      
 
 def staff_register(request):
   company=company_details.objects.all()

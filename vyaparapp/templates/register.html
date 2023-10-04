@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -237,7 +237,7 @@
 
  
         <div class="form-container sign-up"  id="sign-up" style=" background-color: rgb(188, 232, 250);">
-            <form action="{% url 'register_user' %}" method="post">
+            <form action="" method="post">
                 {% csrf_token %}
                 <h2 style="font-size: 2.5rem;margin-top: 10px;">Company Sign Up</h2>
                 <div class="form-group">
@@ -343,7 +343,153 @@
             wrapper.classList.add('animated-signup');
             
         });  
-    </script>
+    </script> -->
     
+<!-- </body>
+</html> -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>company Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        form .form-control {
+            border-radius: 20px;
+            border: 1px solid gray;
+            margin-top: 10px;
+            
+
+        }
+
+        @media (max-width:768px) {
+            #h1 {
+                font-size: 20px;
+                margin-top: 10px !important;
+            }
+
+            .main {
+                padding: 0px !important;
+                margin: 0px !important;
+                margin-left: 40px !important;
+
+            }
+
+            #btn1 {
+                width: 50% !important;
+                margin-bottom: 20px !important;
+
+            }
+
+            #c2 {
+                border-bottom-left-radius: 20px !important;
+                border-top-right-radius: 0px !important;
+            }
+
+        }
+    </style>
+</head>
+
+<body style="background-color: #455a81;padding-bottom: 20px;">
+    <div class="main m-5 p-5 pt-1 mt-1" style="padding-right: 20px;padding-bottom: 20px;">
+        <h1 class="text-center" id="h1"
+            style="color: rgb(255, 255, 255);text-shadow: 2px 2px 4px #000000; margin-bottom: 40px;">COMPANY REGISTERATION
+        </h1>
+        <div class="row "
+            style="border: 1px solid black;width: 100%; border-radius: 20px;background-color: white;box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.9), 0 6px 20px 0 rgba(0, 0, 0, 0.9);">
+            <div class="col-lg-6 col-md-10 d-flex "
+                style="border-right:1px solid black ;border-bottom: 1px solid black;">
+                <div class="img mt-5">
+                    <center>
+                        <img src="{% static 'images/log1.webp' %}" alt="" class="img-fluid">
+                        <button type="button" class="btn btn-outline-dark" id="btn1"
+                            style="width: 30%;padding: 10px;background-color: red;border-radius: 20px;"><a
+                                href="{% url 'log' %}" class="text-white" style="text-decoration: none;"><b>Login
+                                    Now>>></b></a></button>
+                    </center>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-9 col-sm-12 pb-5 pt-5 align-item-center" id="c2"
+                style=" background-color: rgb(194, 222, 233);border-radius: 20px;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
+                <div class="form-box px-2 py-2 align-item-center" >
+                    <div class="container-fluid">
+                        <form id="form" class="mt-2" method="post" action="{% url 'register' %}"
+                            enctype="multipart/form-data" >
+                            <h3 class="text-center mb-5" style="color: rgb(255, 255, 255);text-shadow: 2px 2px 4px #000000;font-weight: bold;">Basic information</h3>
+
+
+                            <div class="form-group ">
+                                {% csrf_token %}
+
+
+                                <input type="text" id="fname" name="fname" class="form-control"
+                                    placeholder="enter firstname" required><br>
+
+
+                                <input type="text" id="lname" name="lname" class="form-control"
+                                    placeholder="enter lastname" required><br>
+
+                                <!-- <input type="text" id="cname" name="cname" class="form-control"
+                                    placeholder="enter company name" required><br> -->
+
+                                <input type="text" id="eid" name="eid" class="form-control" placeholder="enter email"
+                                    required><br>
+
+
+
+                                <input type="text" id="uname" name="uname" class="form-control"
+                                    placeholder="enter username" required><br>
+
+
+
+                                <input type="number" id="ph" name="ph" class="form-control"
+                                    placeholder="enter phone number" required><br>
+
+                                <input type="password" id="pass" name="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control"
+                                    placeholder="enter password" required><br>
+                                <input type="password" id="cpass" name="cpass" class="form-control"
+                                    placeholder="confirm password"  required>
+                                <span id='message' style="margin-top: 0px; padding-top: 0px;"></span><br>
+
+                                
+
+                                <!-- <label for="" style="color: white; font-weight: bold;">Upload Image</label> -->
+                                <!-- <input type="file" id="image" name="image" accept="image/*" class="form-control"
+                                    style="margin-top: 10px; margin-bottom: 20px;"> -->
+                                    
+
+
+                            </div>
+                            <center><input type="submit" id="s" value="SUBMIT" class="btn text-white btn-outline-dark"
+                                    style="margin-top: 20px;  width: 70%; padding: 10px; border-radius: 20px; background-image: linear-gradient(to right,rgb(4, 38, 82),#284293,#a2aee3); font-weight: bold;"><br><br>
+                            </center>
+                            <!-- <center><a href="{% url 'log' %}" class="btn " style="background-color: red; color: white; text-shadow: 2px 2px 4px #5a5959;border-radius: 20px;"><b>Home>>></b></a><br></center> -->
+
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $('#pass, #cpass').on('keyup', function () {
+            if ($('#pass').val() == $('#cpass').val()) {
+                $('#message').html('Password Is Matching').css('color', 'green');
+            } else
+                $('#message').html('Password Is Not Matching').css('color', 'red');
+        });
+    </script>
 </body>
+
 </html>
