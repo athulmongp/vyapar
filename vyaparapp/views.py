@@ -19,19 +19,7 @@ def register_page(request):
       
 
 
-def login(request):
-  if request.method == 'POST':
-    user_name = request.POST['username']
-    passw = request.POST['password']
-    
-    log_user = auth.authenticate(username = user_name,
-                                  password = passw)
-    
-    if log_user is not None:
-      auth.login(request, log_user)
-      return redirect('homepage')
-    else: 
-      return redirect('log')
+
     
 
     
@@ -157,9 +145,7 @@ def register(request):
       if User.objects.filter(username = user_name).exists():
         messages.info(request, 'Sorry, Username already exists')
         return redirect('company_reg')
-      elif company_details.objects.filter(contact_number = mobile).exists():
-        messages.info(request, 'Sorry, Mobile Number already exists')
-        return redirect('company_reg')
+      
 
       elif not User.objects.filter(email = email_id).exists():
     
@@ -171,7 +157,7 @@ def register(request):
         user_data.save()
         
         data = User.objects.get(id = user_data.id)
-        cust_data = company_details(contact_number = mobile,
+        cust_data = company_details( contact=mobile,
                              user = data)
         cust_data.save()
         messages.success(request, 'Welcome'+ '' + data.first_name +' '+data.last_name + '' +'Please Login')
@@ -179,9 +165,35 @@ def register(request):
       else:
         messages.info(request, 'Sorry, Email already exists')
         return redirect('company_reg')
-      
+    return render(request,'register.html')  
 def company_reg2(request):
-  return render(request,'register2.html')      
+  
+  return render(request,'register2.html')  
+def add_company(request):
+  
+  print(id)
+  if request.method == 'POST':
+    email=request.POST['email']
+    user=User.objects.get(email=email)
+    company = company_details.objects.get(user = user)
+    company.company_name=request.POST['cname']
+
+    company.address=request.POST['address']
+    company.city=request.POST['city']
+    company.state=request.POST['state']
+    company.country=request.POST['country']
+    company.pincode=request.POST['pincode']
+    company.pan_number=request.POST['pannumber']
+    company.gst_type=request.POST['gsttype']
+    company.gst_no=request.POST['gstno']
+    company.profile_pic=request.FILES.get('image')
+    company.start_date=request.POST['start']
+    company.End_date=request.POST['end']
+   
+    company.save()
+
+    return redirect('home')  
+  return render(request,'register2.html')   
 
 def staff_register(request):
   company=company_details.objects.all()
@@ -216,5 +228,19 @@ def staff_regaction(request):
   else:
     print(" error")
     return redirect('staff_register')
+  
+def login(request):
+  if request.method == 'POST':
+    user_name = request.POST['username']
+    passw = request.POST['password']
+    
+    log_user = auth.authenticate(username = user_name,
+                                  password = passw)
+    
+    if log_user is not None:
+      auth.login(request, log_user)
+      return redirect('homepage')
+    else: 
+      return redirect('log')  
 
 

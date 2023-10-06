@@ -29,6 +29,7 @@ urlpatterns = [
     path('staff_regaction', views.staff_regaction, name='staff_regaction'),
     path('company_reg', views.company_reg, name='company_reg'),
     path('company_reg2', views.company_reg2, name='company_reg2'),
+    path('add_company', views.add_company, name='add_company'),
     
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     

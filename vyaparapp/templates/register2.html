@@ -56,11 +56,11 @@
                 style="border-right:1px solid black ;border-bottom: 1px solid black;">
                 <div class="img mt-5">
                     <center>
-                        <img src="{% static 'images/reg1.webp' %}" alt="" class="img-fluid">
-                        <button type="button" class="btn btn-outline-dark" id="btn1"
-                            style="width: 30%;padding: 10px;background-color: red;border-radius: 20px;"><a
-                                href="{% url 'log' %}" class="text-white" style="text-decoration: none;"><b>Login
-                                    Now>>></b></a></button>
+                        <img src="{% static 'images/reg1.webp' %}" alt="" class="img-fluid " style="margin-top: 100px;">
+                        <button type="button" class="btn btn-outline-dark " id="btn1"
+                            style="width: 30%;padding: 10px;background-color: red;border-radius: 20px;margin-top: 150px;"><a
+                                href="javascript:history.go(-1);" class="text-white" style="text-decoration: none;">
+                                <b><<< Previous</b></a></button>
                     </center>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                 style="background-color: rgb(194, 222, 233);border-radius: 20px;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
                 <div class="form-box px-2 py-2 align-item-center">
                     <div class="container-fluid">
-                        <form id="form" class="" method="post" action="{% url 'staff_regaction' %}"
+                        <form id="form" class="" method="post" action="{% url 'add_company' %}"
                             enctype="multipart/form-data">
                             <h3 class="text-center mb-5" style="color: rgb(255, 255, 255);text-shadow: 2px 2px 4px #000000;font-weight: bold;">Company Details</h3>
 
@@ -78,6 +78,9 @@
 
                                 <input type="text" id="cname" name="cname" class="form-control"
                                     placeholder="enter company name" required><br>
+
+                                <input type="text" id="email" name="email" class="form-control"
+                                    placeholder="email id (same as Previous page)" required><br>    
 
 
                                 <input type="text" id="address" name="address" class="form-control"
@@ -140,11 +143,11 @@
                                 <input type="number" id="pincode" name="pincode"  class="form-control"
                                     placeholder="pincode" required><br>
 
-                                <input type="number" id="pannumber" name="pannumber" class="form-control"
-                                    placeholder="pan number"  required>
+                                <input type="text" id="pannumber" name="pannumber" class="form-control"
+                                    placeholder="pan number  :  ABCDE1234A"  required>
                                 
 
-                                <select class="form-control mt-4 mb-4" name="select" id="gsttype" 
+                                <select class="form-control mt-4 mb-4" name="gsttype" id="gsttype" 
                                     onclick="hidinput('hello', this),disinput('hai', this) ,disinput2('hai1', this)">
                                     <option selected disabled value="">Select GST Type</option>
                                     <option value="Registered Business - Regular">Registered Business - Regular <span><i>(Business that is registered under gst)</i></span></option>
@@ -154,10 +157,31 @@
                                     <option value="Consumer">Consumer</option>
                                     
                                 </select>
-                                <input type="text"  id="gstno" placeholder="GST Number" class="gstno form-control" style="display: none;">
+                                <input type="text" name="gstno" id="gstno" placeholder="GST Number" class="gstno form-control mb-3" style="display: none;">
+
+                                
+
+                                
+                               
                                 <!-- <label for="" style="color: white; font-weight: bold;">Upload Image</label> -->
                                 <input type="file" id="image" name="image" accept="image/*" class="form-control"
                                     style="margin-top: 20px; margin-bottom: 20px;">
+
+
+                                    <h4 class="mb-4" style="color: rgb(255, 255, 255);text-shadow: 2px 2px 4px #000000;">Terms & Conditions</h4>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6 ><b>Start Date</b></h6>
+                                            <input type="date" name="start" id="start" class="form-control">
+                                            
+                                            
+                                        </div>
+                                        <div class="col">
+                                            <h6><b>End Date</b></h6>
+                                            <input type="date" name="end" id="end" class="form-control">
+                                        </div>
+                                    </div>    
 
 
                             </div>
@@ -177,6 +201,11 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
+
+
+
+
+
         $('#pass, #cpass').on('keyup', function () {
             if ($('#pass').val() == $('#cpass').val()) {
                 $('#message').html('Password Is Matching').css('color', 'green');
@@ -234,6 +263,7 @@
             
             });
         });
+
     </script>
 </body>
 
