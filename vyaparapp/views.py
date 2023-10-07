@@ -11,16 +11,7 @@ from django.http.response import JsonResponse
 def home(request):
   return render(request, 'home.html')
 
-def register_page(request):
-  return render(request, 'register.html')
 
-
-
-      
-
-
-
-    
 
     
 def homepage(request):
@@ -30,13 +21,23 @@ def homepage(request):
           }
   return render(request, 'homepage.html', context)
 
+def staffhome(request,id):
+  staff =  staff_details.objects.get(id=id)
+  context = {
+              'staff' : staff
+          }
+  return render(request, 'staffhome.html', context)
+
+
+
+
 # @login_required(login_url='login')
 def logout(request):
     auth.logout(request)
     return redirect('/')
 
 def view_profile(request):
-  company =  company_details.objects.get(user = request.user)
+  company =  company_details.objects.get(user = request.user) 
   selected_options = request.session.get('selected_options', None)
   
   context = {
@@ -200,7 +201,7 @@ def staff_register(request):
 
   return render(request, 'staffreg.html',{'company':company})
 
-def staff_regaction(request):
+def staff_registraction(request):
   if request.method == 'POST':
     fn=request.POST['fname']
     ln=request.POST['lname']
@@ -229,6 +230,9 @@ def staff_regaction(request):
     print(" error")
     return redirect('staff_register')
   
+def log_page(request):
+  return render(request, 'log.html')
+  
 def login(request):
   if request.method == 'POST':
     user_name = request.POST['username']
@@ -239,8 +243,46 @@ def login(request):
     
     if log_user is not None:
       auth.login(request, log_user)
-      return redirect('homepage')
-    else: 
-      return redirect('log')  
+      if request.user.is_staff==1:
+        return redirect('home')
+      else:
+        return redirect('homepage')
+    elif staff_details.objects.filter(user_name=user_name,password=passw).exists(): 
+      data=staff_details.objects.get(user_name=user_name,password=passw)
+      return redirect('staffhome',data.id)  
 
+
+    #   if request.method=='POST':
+    #     username = request.POST['ui']
+    #     password = request.POST['pa']
+        
+    #     user= auth.authenticate(username=username, password=password)
+        
+    #     if user is not None:
+    #         auth.login(request, user)
+            
+    #         if request.user.is_staff==1:
+    #             print("admin")
+       
+    #             return redirect('adminhomepage')
+                 
+    #         else:
+    #           current_user=request.user
+    #           uid=current_user.id
+    #           if RegisterModel.objects.filter(user=uid).exists():
+    #               return redirect('homepage')
+    #           elif TrainerRegModel.objects.filter(user=uid).exists():
+    #               return redirect('thomepage')
+    #           else:
+    #             return redirect('log')
+                  
+              
+    #     else:
+    #         messages.info(request, 'Invalid Username or Password. Try Again.')
+    #         print("try again")
+    #         return redirect('log')
+    # else:
+    #     messages.error(request,'Invalid')
+    #     print("try again")
+    #     return redirect('log')
 
