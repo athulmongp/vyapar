@@ -1,6 +1,6 @@
 <!-- create by athul -->
 
-{% extends 'company/base.html' %}
+{% extends 'admin/adminbase.html' %}
 
 {% block content %}
 {% load static %}
@@ -11,13 +11,13 @@
         
     <div class="container-fluid mt-5 pt-5 p-3 pr-5" style="height: 100vh;">
       <div class="row p-3">
-        {% for d in allstaff %}
+        {% for d in data %}
          
         <div class="col-md-4">
-          <div class="card mt-5 text-center" style="text-align: justify; width: 90%; height: 300px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);background-color: #454545;color: white;">
+          <div class="card mt-5 text-center" style="text-align: justify; width: 90%; height: 350px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);background-color: #454545;color: white;">
             <center>
-                {% if d.img %}
-            <img class="img-xs rounded-circle " style="height: 70px; width: 70px;" src="{{ d.img.url }}"
+                {% if d.profile_pic %}
+            <img class="img-xs rounded-circle " style="height: 70px; width: 70px;" src="{{ d.profile_pic.url }}"
               alt="" >
             {% else %}
             <img class="img-xs rounded-circle" style="height: 70px; width: 70px;"
@@ -25,14 +25,14 @@
             {% endif %}
             </center>
             <div class="card-header">
-                <h2 class="text-center"><b> {{d.first_name}} {{d.last_name}} </b></h2>
+                <h2 class="text-center"><b>{{d.company_name}}</b></h2>
             </div>
             <div class="card-body">
-                Username : <b> {{d.user_name}}</b><br>
-                Email : <b>{{d.email}}</b> <br>
-                Contact  : <b>{{ d.contact }}</b>
-                <!-- state : <b>{{ d.state }}</b><br>
-                country : <b>{{ d.country }}</b> -->
+                Owner : <b> {{d.user.first_name}} {{d.user.last_name}} </b><br>
+                Email : <b>{{d.user.email}}</b> <br>
+                City  : <b>{{ d.city }}</b>-
+                state : <b>{{ d.state }}</b><br>
+                country : <b>{{ d.country }}</b>
                 
                     <div class="row mt-4 p-1 justify-content-center">
                         

@@ -5,83 +5,77 @@
 {% block content %}
 {% load static %}
 <style>
-    body{
+    /* body{
         background-color: rgb(193, 221, 245);
+    } */
+    body{
+      background-color: rgba(176, 199, 205, 0.4);
     }
     @media screen and (min-width: 768px) {
         .card{
             width: 80%;
         }
     }
+    .fa{
+      color: white;
+    }
+    h6{
+      color: white;
+    }
+    h6:hover{
+      color: #16c7ff;
+    
+
+    }
+    .fa:hover{
+      color: #16c7ff;
+      
+      animation: swing ease-in-out 0.5s 1 alternate;
+      
+    }
+    #col1:hover{
+      color: #16c7ff;
+      text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5);
+      cursor: pointer;
+     
+
+
+    }
+    
+    #col2:hover{
+      color: #16c7ff;
+      text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5);
+      cursor: pointer;
+
+    }
+    
 
 </style>
 
 <body>
-    
-    <div class="container-fluid mt-5 pt-5 ">
-        {% for d in data %}
+
+
+   <div class="container-fluid p-5" >
+    <div class="row p-3 m-3 mt-5">
+      <div class="col-md-3 p-5 mr-5 mt-1" id="col1" style=" background-color: #454545;border: 1px solid white;border-radius: 6px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
         <center>
-            <div class="card m-5 " style="margin: 20px;width: 60%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                <center>
-                    {% if d.profile_pic %}
-                <img class="img-xs rounded-circle " style="height: 70px; width: 70px;" src="{{ d.profile_pic.url }}"
-                  alt="" >
-                {% else %}
-                <img class="img-xs rounded-circle" style="height: 40px; width: 40px;"
-                  src="{% static 'images/default.jpg' %}" class="rounded-circle">
-                {% endif %}
-                </center>
-                <div class="card-header">
-                    <h2><b>{{d.company_name}}</b></h2>
-                </div>
-                <div class="card-body">
-                    Owner : <b> {{d.user.first_name}} {{d.user.last_name}} </b><br>
-                    Email : <b>{{d.user.email}}</b> <br>
-                    City  : <b>{{ d.city }}</b>-
-                    state : <b>{{ d.state }}</b>-
-                    country : <b>{{ d.country }}</b>
-                    
-                        <div class="row mt-4 p-1 justify-content-center">
-                            
-                
-                            <div class="col-md-5" style="width: 100%;"><a href="{% url 'adminaccept' d.id %}"><button class="btn-primary" style="width: 100%;padding: 5px;font-weight: bold;border-radius: 10px;">Accept</button></a></div>
-                            <div class="col-md-5" style="width: 100%;"><a href="{% url 'adminreject' d.id %}"><button class="btn-danger" style="width: 100%;padding: 5px;font-weight: bold;border-radius: 10px;">Reject</button></a></div>
-
-                        
-                        </div>
-                    
-                </div>
-                
-            </div>
+         <a href="{% url 'client_request' %}">
+          <i class="fa fa-user-plus" style="font-size: 1.5em;"></i>
+          <h6 class="text-center mt-2.5" style="font-weight: bold;">CLIENTS REQUEST</h6>
+         </a>
         </center>
-        {% endfor %}
 
-        <h3 class="text-center"><b style="color: rgb(158, 213, 245);text-shadow: 2px 2px 4px #000000; margin-bottom: 40px;">All Company</b></h3>
+      </div>
+      <div class="col-md-3 p-5 mr-5 mt-1" id="col2" style=" box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);background-color: #454545;border: 1px solid white;border-radius: 6px;">
+        <center>
+          <a href="{% url 'client_details' %}">
+          <i class="fa fa-users" style="font-size: 1.5em;"></i>
+        <h6 class="text-center mt-2.5" style="font-weight: bold;">ALL CLIENTS</h6></a>
+        </center>
         
-        <table class="table table-hover mt-5">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Company Name</th>
-                <th scope="col">Email</th>
-                
-                <th scope="col">Contact</th>
-                <th scope="col">Time Period</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% for a in all %}
-              <tr>
-                <td>{{a.id}}</th>
-                <td> {{a.company_name}} </td>
-                <td>{{a.user.email}}</td>
-                <td>{{a.contact}}</td>
-                <td>{{a.dateperiod}}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+      </div>
     </div>
+   </div>
 </body>
 
 

@@ -28,11 +28,10 @@ def staffhome(request,id):
           }
   return render(request, 'staff/staffhome.html', context)
 def adminhome(request):
-  data = company_details.objects.filter(Action = 0)
-  all = company_details.objects.filter(Action = 1)
+ 
   
   
-  return render(request, 'admin/adminhome.html',{'data': data,'all':all})
+  return render(request, 'admin/adminhome.html')
 
 
 
@@ -256,6 +255,7 @@ def login(request):
         if data.Action == 1:
           return redirect('homepage')
         else:
+          messages.info(request, 'Approval is Pending..')
           return redirect('log_page')
 
     elif staff_details.objects.filter(user_name=user_name,password=passw).exists(): 
@@ -263,9 +263,11 @@ def login(request):
       if data.Action == 1:
         return redirect('staffhome',data.id)  
       else:
+        messages.info(request, 'Wait For Approval')
         return redirect('log_page')
 
     else:
+      messages.info(request, 'Invalid Username or Password. Try Again.')
       return redirect('log_page')
 def adminaccept(request,id):
   data=company_details.objects.filter(id=id).update(Action=1)
@@ -276,6 +278,31 @@ def adminreject(request,id):
   data.delete()
   return redirect('adminhome')
 
+
+
+def companyaccept(request,id):
+  data=staff_details.objects.filter(id=id).update(Action=1)
+  return redirect('staff_request')
+
+def companyreject(request,id):
+  data=staff_details.objects.get(id=id)
+  
+  data.delete()
+  return redirect('staff_request')
+
+def client_request(request):
+  data = company_details.objects.filter(Action = 0)
+  all = company_details.objects.filter(Action = 1)
+  return render(request,'admin/client_request.html',{'data': data,'all':all})
+
+def client_details(request):
+  data = company_details.objects.filter(Action = 1)
+  return render(request,'admin/client_details.html',{"data":data})
+
+def staff_request(request):
+  company =  company_details.objects.get(user = request.user)
+  staff = staff_details.objects.filter(company=company,Action=0)
+  return render(request,'company/staff_request.html',{'staff':staff,'company':company})  
 def View_staff(request):
   company =  company_details.objects.get(user = request.user)
   staff = staff_details.objects.filter(company=company,Action=0)
@@ -283,13 +310,5 @@ def View_staff(request):
 
   return render(request, 'company/view_staff.html',{'staff':staff,'company':company,'allstaff':allstaff})
 
-def companyaccept(request,id):
-  data=staff_details.objects.filter(id=id).update(Action=1)
-  return redirect('View_staff')
 
-def companyreject(request,id):
-  data=staff_details.objects.get(id=id)
-  
-  data.delete()
-  return redirect('View_staff')
 
