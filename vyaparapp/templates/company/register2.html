@@ -1,3 +1,5 @@
+<!-- Create by athul. -->
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -168,18 +170,23 @@
                                     style="margin-top: 20px; margin-bottom: 20px;">
 
 
-                                    <h4 class="mb-4" style="color: rgb(255, 255, 255);text-shadow: 2px 2px 4px #000000;">Terms & Conditions</h4>
+                                    <h6 class="mt-4" >How Many Months Purchase?</h6>
 
                                     <div class="row">
                                         <div class="col">
-                                            <h6 ><b>Start Date</b></h6>
-                                            <input type="date" name="start" id="start" class="form-control">
+                                            <select name="select" id="select" class="form-control" onclick="buydate()">
+                                                <option value="One Month">One Month</option>
+                                                <option value="Six Month">Six Month</option>
+                                                <option value="One Year">One Year</option>
+                                                <option value="Two Year">Two Year</option>
+                                                <option value="Five Year">Five Year</option>
+                                            </select>
                                             
                                             
                                         </div>
                                         <div class="col">
-                                            <h6><b>End Date</b></h6>
-                                            <input type="date" name="end" id="end" class="form-control">
+                                            <!-- <h6><b>End Date</b></h6> -->
+                                            <input type="text" name="end" id="end" class="form-control" placeholder="end date" readonly>
                                         </div>
                                     </div>    
 
@@ -263,6 +270,36 @@
             
             });
         });
+
+        function buydate(){
+            const date = new Date();
+            const select = document.getElementById('select').value;
+            if( select == 'One Month' ){
+                date.setDate(date.getDate()+30);
+            
+               document.getElementById('end').value = date.toJSON().slice(0,10);
+            }
+            if( select == 'Six Month' ){
+                date.setDate(date.getDate()+180);
+            
+               document.getElementById('end').value = date.toJSON().slice(0,10);
+            }
+            if( select == 'One Year' ){
+                date.setDate(date.getDate()+360);
+            
+               document.getElementById('end').value = date.toJSON().slice(0,10);
+            }
+            if( select == 'Two Year' ){
+                date.setDate(date.getDate()+720);
+            
+               document.getElementById('end').value = date.toJSON().slice(0,10);
+            }
+            if( select == 'Five Year' ){
+                date.setDate(date.getDate()+1800);
+            
+               document.getElementById('end').value = date.toJSON().slice(0,10);
+            }
+        }
 
     </script>
 </body>

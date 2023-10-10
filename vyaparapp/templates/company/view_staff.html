@@ -1,0 +1,85 @@
+<!-- create by athul -->
+
+{% extends 'company/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<style>
+    body{
+        background-color: rgb(193, 221, 245);
+    }
+    @media screen and (min-width: 768px) {
+        .card{
+            width: 80%;
+        }
+    }
+
+</style>
+
+<body>
+    
+    <div class="container-fluid mt-5 pt-5 ">
+        
+        {% for s in staff %}
+        <center>
+            <div class="card m-5 " style="margin: 20px;width: 60%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <center>
+                    {% if d.img %}
+                <img class="img-xs rounded-circle " style="height: 70px; width: 70px;" src="{{ d.img.url }}"
+                  alt="" >
+                {% else %}
+                <img class="img-xs rounded-circle" style="height: 40px; width: 40px;"
+                  src="{% static 'images/default.jpg' %}" class="rounded-circle">
+                {% endif %}
+                </center>
+                <div class="card-header">
+                    <h2><b> {{s.first_name}} {{s.last_name}} </b></h2>
+                </div>
+                <div class="card-body">
+                    
+                    Email : <b>{{s.email}}</b> <br>
+                    Contact  : <b>{{ s.contact }}</b>
+                    
+                    
+                        <div class="row mt-4 p-1 justify-content-center">
+                            
+                
+                            <div class="col-md-5" style="width: 100%;"><a href="{% url 'companyaccept' s.id %}"><button class="btn-primary" style="width: 100%;padding: 5px;font-weight: bold;border-radius: 10px;">Accept</button></a></div>
+                            <div class="col-md-5" style="width: 100%;"><a href="{% url 'companyreject' s.id %}"><button class="btn-danger" style="width: 100%;padding: 5px;font-weight: bold;border-radius: 10px;">Reject</button></a></div>
+
+                        
+                        </div>
+                    
+                </div>
+                
+            </div>
+        </center>
+        {% endfor %}
+
+        <h3 class="text-center"><b style="color: rgb(158, 213, 245);text-shadow: 2px 2px 4px #000000; margin-bottom: 40px;">Employees Details</b></h3>
+        
+        <table class="table table-hover mt-5">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Contact</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for a in allstaff %}
+              <tr>
+                <td>{{a.id}}</th>
+                <td> {{a.first_name}} {{a.last_name}} </td>
+                <td>{{a.email}}</td>
+                <td>{{a.contact}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</body>
+
+{% endblock content %}

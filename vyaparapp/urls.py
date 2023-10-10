@@ -26,6 +26,7 @@ urlpatterns = [
     path('hide_options', views.hide_options, name='hide_options'),
 
     path('staffhome/<id>', views.staffhome, name='staffhome'),
+    path('adminhome', views.adminhome, name='adminhome'),
     
     
     path('staff_register', views.staff_register, name='staff_register'),
@@ -35,6 +36,11 @@ urlpatterns = [
     path('add_company', views.add_company, name='add_company'),
     path('log_page', views.log_page, name='log_page'),
     path('login', views.login, name='login'),
+    path('adminaccept/<id>', views.adminaccept, name='adminaccept'),
+    path('adminreject/<id>', views.adminreject, name='adminreject'),
+    path('View_staff', views.View_staff, name='View_staff'),
+    path('companyaccept/<id>', views.companyaccept, name='companyaccept'),
+    path('companyreject/<id>', views.companyreject, name='companyreject'),
     
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     

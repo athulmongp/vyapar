@@ -1,4 +1,4 @@
-<!-- update by athul -->
+<!-- Create by athul. -->
 {% load static %}
 
 <!DOCTYPE html>
@@ -942,8 +942,8 @@
         <!-- style="margin-left: 16vw;" -->
         <div class="sidebar-header" style="margin-left: 20px;">
           <div class="user-pic" style="height: 8px;">
-            {% if company.profile_pic %}
-            <img class="img-xs rounded-circle" style="height: 50px; width: 50px;" src="{{ company.profile_pic.url }}"
+            {% if staff.img %}
+            <img class="img-xs rounded-circle" style="height: 50px; width: 50px;" src="{{ staff.img.url }}"
               alt="">
             {% else %}
             <img class="img-xs rounded-circle" style="height: 40px; width: 40px;"
@@ -952,11 +952,9 @@
           </div>
           <div class="user-info" style="margin-left: 3.5rem;">
             <span class="user-name">
-              {% if company.company_name != None %}
-              <b class="text-white">{{ company.company_name }}</b>
-              {% else %}
-              <b class="text-white">Add Company</b>
-              {% endif %}
+              
+              <b class="text-white">{{ staff.first_name }} {{ staff.last_name }}</b>
+              
             </span>
           </div>
           <div id="dropdown-container">
@@ -965,8 +963,8 @@
                 <i class="fa fa-caret-down"></i>
               </button>
               <div class="dropdown-content">
-                <a href="{% url 'homepage' %}">Dashboard</a>
-                <a href="{% url 'view_profile' %}">Profile</a>
+                <a href="">Dashboard</a>
+                <a href="">Profile</a>
                 <a href="{% url 'logout' %}">Logout</a>
               </div>
             </div>

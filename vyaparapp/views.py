@@ -19,14 +19,20 @@ def homepage(request):
   context = {
               'company' : company
           }
-  return render(request, 'homepage.html', context)
+  return render(request, 'company/homepage.html', context)
 
 def staffhome(request,id):
   staff =  staff_details.objects.get(id=id)
   context = {
               'staff' : staff
           }
-  return render(request, 'staffhome.html', context)
+  return render(request, 'staff/staffhome.html', context)
+def adminhome(request):
+  data = company_details.objects.filter(Action = 0)
+  all = company_details.objects.filter(Action = 1)
+  
+  
+  return render(request, 'admin/adminhome.html',{'data': data,'all':all})
 
 
 
@@ -80,7 +86,7 @@ def edit_profile(request,pk):
       'user1' : user1,
       'selected_options': json.dumps(selected_options)
   } 
-  return render(request,'edit_profile.html',context)
+  return render(request,'company/edit_profile.html',context)
 
 
 def sale_invoices(request):
@@ -112,7 +118,7 @@ def settings(request):
               'selected_options': json.dumps(selected_options),
               
           }
-  return render(request, 'settings.html',context)
+  return render(request, 'company/settings.html',context)
 
 def hide_options(request):
     
@@ -125,12 +131,12 @@ def hide_options(request):
     context = {'selected_options': json.dumps(selected_options),
                'company' : company}
    
-    return render(request, 'homepage.html', context)
+    return render(request, 'company/homepage.html', context)
 
 # ------created by athul------
 
 def company_reg(request):
-  return render(request,'register.html')
+  return render(request,'company/register.html')
 
 def register(request):
   if request.method == 'POST':
@@ -166,10 +172,10 @@ def register(request):
       else:
         messages.info(request, 'Sorry, Email already exists')
         return redirect('company_reg')
-    return render(request,'register.html')  
+    return render(request,'company/register.html')  
 def company_reg2(request):
   
-  return render(request,'register2.html')  
+  return render(request,'company/register2.html')  
 def add_company(request):
   
   print(id)
@@ -188,18 +194,18 @@ def add_company(request):
     company.gst_type=request.POST['gsttype']
     company.gst_no=request.POST['gstno']
     company.profile_pic=request.FILES.get('image')
-    company.start_date=request.POST['start']
+    company.dateperiod=request.POST['select']
     company.End_date=request.POST['end']
    
     company.save()
 
     return redirect('home')  
-  return render(request,'register2.html')   
+  return render(request,'company/register2.html')   
 
 def staff_register(request):
   company=company_details.objects.all()
 
-  return render(request, 'staffreg.html',{'company':company})
+  return render(request, 'staff/staffreg.html',{'company':company})
 
 def staff_registraction(request):
   if request.method == 'POST':
@@ -224,7 +230,7 @@ def staff_registraction(request):
       staff=staff_details(first_name=fn,last_name=ln,email=email,user_name=un,password=pas,contact=ph,img=img,company=company)
       staff.save()
       print("success")
-      return redirect('log')
+      return redirect('log_page')
 
   else:
     print(" error")
@@ -244,45 +250,46 @@ def login(request):
     if log_user is not None:
       auth.login(request, log_user)
       if request.user.is_staff==1:
-        return redirect('home')
+        return redirect('adminhome')
       else:
-        return redirect('homepage')
+        data=company_details.objects.get(user=request.user)
+        if data.Action == 1:
+          return redirect('homepage')
+        else:
+          return redirect('log_page')
+
     elif staff_details.objects.filter(user_name=user_name,password=passw).exists(): 
       data=staff_details.objects.get(user_name=user_name,password=passw)
-      return redirect('staffhome',data.id)  
+      if data.Action == 1:
+        return redirect('staffhome',data.id)  
+      else:
+        return redirect('log_page')
 
+    else:
+      return redirect('log_page')
+def adminaccept(request,id):
+  data=company_details.objects.filter(id=id).update(Action=1)
+  return redirect('adminhome')
+def adminreject(request,id):
+  data=company_details.objects.get(id=id)
+  data.user.delete()
+  data.delete()
+  return redirect('adminhome')
 
-    #   if request.method=='POST':
-    #     username = request.POST['ui']
-    #     password = request.POST['pa']
-        
-    #     user= auth.authenticate(username=username, password=password)
-        
-    #     if user is not None:
-    #         auth.login(request, user)
-            
-    #         if request.user.is_staff==1:
-    #             print("admin")
-       
-    #             return redirect('adminhomepage')
-                 
-    #         else:
-    #           current_user=request.user
-    #           uid=current_user.id
-    #           if RegisterModel.objects.filter(user=uid).exists():
-    #               return redirect('homepage')
-    #           elif TrainerRegModel.objects.filter(user=uid).exists():
-    #               return redirect('thomepage')
-    #           else:
-    #             return redirect('log')
-                  
-              
-    #     else:
-    #         messages.info(request, 'Invalid Username or Password. Try Again.')
-    #         print("try again")
-    #         return redirect('log')
-    # else:
-    #     messages.error(request,'Invalid')
-    #     print("try again")
-    #     return redirect('log')
+def View_staff(request):
+  company =  company_details.objects.get(user = request.user)
+  staff = staff_details.objects.filter(company=company,Action=0)
+  allstaff = staff_details.objects.filter(company=company,Action=1)
+
+  return render(request, 'company/view_staff.html',{'staff':staff,'company':company,'allstaff':allstaff})
+
+def companyaccept(request,id):
+  data=staff_details.objects.filter(id=id).update(Action=1)
+  return redirect('View_staff')
+
+def companyreject(request,id):
+  data=staff_details.objects.get(id=id)
+  
+  data.delete()
+  return redirect('View_staff')
 
