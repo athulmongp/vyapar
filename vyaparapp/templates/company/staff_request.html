@@ -17,10 +17,10 @@
           <div class="card m-5 text-center" style="text-align: justify; width: 90%; height: 350px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);background-color: #454545;color: white;">
             <center>
                 {% if d.img %}
-            <img class="img-xs rounded-circle " style="height: 70px; width: 70px;" src="{{ d.img.url }}"
+            <img class="img-xs rounded-circle mt-4" style="height: 70px; width: 70px;" src="{{ d.img.url }}"
               alt="" >
             {% else %}
-            <img class="img-xs rounded-circle" style="height: 70px; width: 70px;"
+            <img class="img-xs rounded-circle mt-4" style="height: 70px; width: 70px;"
               src="{% static 'images/default.jpg' %}" class="rounded-circle">
             {% endif %}
             </center>

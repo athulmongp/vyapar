@@ -166,7 +166,7 @@ def register(request):
         cust_data = company_details( contact=mobile,
                              user = data)
         cust_data.save()
-        messages.success(request, 'Welcome'+ '' + data.first_name +' '+data.last_name + '' +'Please Login')
+        messages.success(request, 'Welcome'+ ' ' +  data.first_name +' '+data.last_name + ' '+ 'Please Login')
         return redirect('company_reg2')
       else:
         messages.info(request, 'Sorry, Email already exists')
@@ -263,7 +263,7 @@ def login(request):
       if data.Action == 1:
         return redirect('staffhome',data.id)  
       else:
-        messages.info(request, 'Wait For Approval')
+        messages.info(request, 'Approval is Pending..')
         return redirect('log_page')
 
     else:
@@ -291,22 +291,22 @@ def companyreject(request,id):
   return redirect('staff_request')
 
 def client_request(request):
-  data = company_details.objects.filter(Action = 0)
+  data = company_details.objects.filter(Action = 0).order_by('-id')
   all = company_details.objects.filter(Action = 1)
   return render(request,'admin/client_request.html',{'data': data,'all':all})
 
 def client_details(request):
-  data = company_details.objects.filter(Action = 1)
+  data = company_details.objects.filter(Action = 1).order_by('-id')
   return render(request,'admin/client_details.html',{"data":data})
 
 def staff_request(request):
   company =  company_details.objects.get(user = request.user)
-  staff = staff_details.objects.filter(company=company,Action=0)
+  staff = staff_details.objects.filter(company=company,Action=0).order_by('-id')
   return render(request,'company/staff_request.html',{'staff':staff,'company':company})  
 def View_staff(request):
   company =  company_details.objects.get(user = request.user)
   staff = staff_details.objects.filter(company=company,Action=0)
-  allstaff = staff_details.objects.filter(company=company,Action=1)
+  allstaff = staff_details.objects.filter(company=company,Action=1).order_by('-id')
 
   return render(request, 'company/view_staff.html',{'staff':staff,'company':company,'allstaff':allstaff})
 

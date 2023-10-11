@@ -14,13 +14,13 @@
         {% for d in data %}
          
         <div class="col-md-4">
-          <div class="card mt-5 text-center" style="text-align: justify; width: 90%; height: 350px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);background-color: #454545;color: white;">
+          <div class="card mt-5 text-center" style="text-align: justify; width: 90%; height: 400px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);background-color: #454545;color: white;">
             <center>
                 {% if d.profile_pic %}
-            <img class="img-xs rounded-circle " style="height: 70px; width: 70px;" src="{{ d.profile_pic.url }}"
+            <img class="img-xs rounded-circle mt-4" style="height: 70px; width: 70px;" src="{{ d.profile_pic.url }}"
               alt="" >
             {% else %}
-            <img class="img-xs rounded-circle" style="height: 70px; width: 70px;"
+            <img class="img-xs rounded-circle mt-4" style="height: 70px; width: 70px;"
               src="{% static 'images/default.jpg' %}" class="rounded-circle">
             {% endif %}
             </center>
@@ -30,18 +30,16 @@
             <div class="card-body">
                 Owner : <b> {{d.user.first_name}} {{d.user.last_name}} </b><br>
                 Email : <b>{{d.user.email}}</b> <br>
-                City  : <b>{{ d.city }}</b>-
+                <!-- City  : <b>{{ d.city }}</b>-
                 state : <b>{{ d.state }}</b><br>
-                country : <b>{{ d.country }}</b>
+                country : <b>{{ d.country }}</b><br> -->
+                Payment Terms : <b>{{d.dateperiod}}</b><br>
+                End Date : <b>{{d.End_date}}</b>
                 
-                    <div class="row mt-4 p-1 justify-content-center">
-                        
-            
-                 
-                        <div class="col-md-5" style="width: 100%;"><a href=""><button class="btn-danger" style="width: 100%;padding: 5px;font-weight: bold;border-radius: 10px;">Delete</button></a></div>
+                    <a href=""><button class="btn-danger mt-4" style="width: 80%;padding: 5px;font-weight: bold;border-radius: 10px;">Cancel Agreement</button></a>
 
                     
-                    </div>
+                   
                 
             </div>
             

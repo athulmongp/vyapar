@@ -14,10 +14,10 @@
         {% for d in allstaff %}
          
         <div class="col-md-4">
-          <div class="card mt-5 text-center" style="text-align: justify; width: 90%; height: 300px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);background-color: #454545;color: white;">
+          <div class="card mt-5 text-center mt-4" style="text-align: justify; width: 90%; height: 330px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);background-color: #454545;color: white;">
             <center>
                 {% if d.img %}
-            <img class="img-xs rounded-circle " style="height: 70px; width: 70px;" src="{{ d.img.url }}"
+            <img class="img-xs rounded-circle mt-4" style="height: 70px; width: 70px;" src="{{ d.img.url }}"
               alt="" >
             {% else %}
             <img class="img-xs rounded-circle" style="height: 70px; width: 70px;"
@@ -38,7 +38,7 @@
                         
             
                  
-                        <div class="col-md-5" style="width: 100%;"><a href=""><button class="btn-danger" style="width: 100%;padding: 5px;font-weight: bold;border-radius: 10px;">Delete</button></a></div>
+                        <div class="col-md-5" style="width: 100%;"><a href=""><button class="btn-danger" style="width: 100%;padding: 5px;font-weight: bold;border-radius: 10px;">Remove</button></a></div>
 
                     
                     </div>
