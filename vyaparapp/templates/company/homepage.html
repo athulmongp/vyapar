@@ -1,666 +1,288 @@
 <!-- create by athul -->
 
-{% extends 'company/base.html' %}
+{% extends 'company/src/html/base.html' %}
 
 {% block content %}
 {% load static %}
 <style>
-  /* CSS */
-  .select-box {
-    float: right;
-    margin-right: 10px;
-    margin-top: 1vh;
-    padding: 0.5vw 1vh;
-    /* Add padding for better appearance */
-    border: 1px solid #ccc;
-    /* Add a border for a neat outline */
-    border-radius: 5px;
-    /* Round the corners */
-    background-color: #fff;
-    /* Set a background color */
-    font-size: 16px;
-    /* Adjust the font size */
-  }
-
-  /* Style for the selected option */
-  .select-box option[selected] {
-    font-weight: bold;
-    /* Make the selected option bold */
-  }
-
-  /* Style for all options */
-  .select-box option {
-    font-weight: normal;
-    /* Reset font-weight for non-selected options */
-  }
-
-  /* Hover effect for the dropdown */
-  .select-box:hover {
-    border-color: #007bff;
-    /* Change border color on hover */
-  }
-
-  .card1 {
-    width: 32vw;
-    height: 20vh;
-  }
-
-  .card2 {
-    width: 23vw;
-    height: 20vh;
-  }
-
-  .card3 {
-    width: 17vw;
-    height: 17vh;
-  }
-
-  .card4 {
-    width: 17vw;
-    height: 17vh;
-  }
-
-  .card5 {
-    width: 20vw;
-    height: 17vh;
-  }
-
-  .grid-item {
-    background-color: #454545;
-    color: white;
-    font-size: 15px;
-    height: 20rem;
-  }
-
-  .sidebar1 {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 150%;
-    width: 22vw;
-    /* overflow-y: auto; */
-    /* Enable vertical scrolling */
-    background-color: white;
-    color: white;
-    padding: 20px;
-  }
-
-  /* Add some styles for the fieldsets and legends in the sidebar */
-  .sidebar1 fieldset {
-    border: 1px solid white;
-    margin-bottom: 20px;
-    padding: 10px;
-  }
-
-  .sidebar1 legend {
-    color: white;
-    font-weight: bold;
-  }
-
-  /* Add some styles for the small switch */
-  .privacy {
-    color: black;
-    background-color: #454545;
-    padding: 10px;
-    /* Add padding for spacing */
-  }
-
-  .small-switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 26px;
-    background: lightblue;
-    border-radius: 20px;
-  }
-
-  .small-switch input {
-    display: none;
-    padding: 1rem;
-  }
-
-  .slider1:before {
-    position: absolute;
-    content: "";
-    height: 20px;
-    width: 20px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: 0.4s;
-    border-radius: 50%;
-
-  }
-
-  input:checked+.slider1 {
-    background-color: #2196F3;
-  }
-
-  input:checked+.slider1:before {
-    transform: translateX(24px);
-
-
-  }
-
-  .round {
-    border-radius: 34px;
-  }
-
-  h4 {
-    font-size: 24px;
-    /* Adjust the font size as needed */
-  }
-
-  .stock-value {
-    border: 1px solid white;
-    background-color: #454545;
-    padding: 10px;
-    /* Add padding for spacing */
-    border-radius: 5px;
-    /* Add border-radius for rounded corners */
-    color: white;
-    /* Set text color to white */
-  }
-
-  .stock-value legend {
-    font-weight: bold;
-    /* Add bold font-weight to the legend */
-  }
-
-  .stock-value p {
-    margin: 0;
-    /* Remove default margin for the <p> element */
-    font-size: 18px;
-    /* Adjust the font size as needed */
-  }
-
-  .low-stocks {
-    border: 1px solid white;
-    background-color: #454545;
-    padding: 10px;
-    /* Add padding for spacing */
-    border-radius: 5px;
-    /* Add border-radius for rounded corners */
-    color: white;
-    /* Set text color to white */
-  }
-
-  .low-stocks legend {
-    font-weight: bold;
-    /* Add bold font-weight to the legend */
-  }
-
-  .low-stocks p {
-    margin: 0;
-    /* Remove default margin for the <p> element */
-    font-size: 18px;
-    /* Adjust the font size as needed */
-  }
-
-  .cash-and-bank {
-    display: flex;
-    flex-direction: column;
-    width: 18rem;
-    
-  }
-
-  .cash-in-hand {
-    border: 1px solid white;
-    background-color: #454545;
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    width: 18rem;
-    /* Set the width as needed */
-    margin: 0 auto;
-    /* Center the element horizontally */
-  }
-
-  .cash-in-hand legend {
-    font-weight: bold;
-  }
-
-  .cash-in-hand p {
-    margin: 0;
-    font-size: 18px;
-  }
-
-  .bank-accounts {
-    border: 1px solid white;
-    background-color: #454545;
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-  }
-
-  .bank-accounts legend {
-    font-weight: bold;
-    margin-bottom: 10px;
-    /* Add spacing below the legend */
-  }
-
-  .bank-accounts p {
-    margin: 0;
-    font-size: 18px;
-  }
-
-  .bank-accounts table {
-    width: 100%;
-    margin-top: 10px;
-    /* Add spacing above the table */
-    border-collapse: collapse;
-  }
-
-  .bank-accounts td {
-    border: 1px solid white;
-    padding: 5px;
-    text-align: left;
-  }
-
-  .bank-accounts td:first-child {
-    font-weight: bold;
-    /* Make the first column bold */
-  }
-
-  @media (max-width: 768px) {
-    .card1 {
-      width: 100%;
-      margin-left: 10%;
-
-    }
-
-    .card2 {
-      width: 110%;
-      margin-left: 1;
-      margin-top: 100%;
-
-    }
-
-    .card3 {
-      width: 100%;
-      margin-left: 10%;
-      margin-top: 10%;
-
-
-    }
-
-    .card4 {
-      width: 120%;
-      padding-left: 22%;
-      margin-top: 60%;
-
-    }
-
-    .card5 {
-      width: 130%;
-      padding-left: 35%;
-      margin-top: 60%;
-
-    }
-
-    .card1 h4 {
-
-      font-size: 20px;
-      margin-bottom: 40px;
-
-    }
-    #col1{
-      margin-left: 40px;
-      width: 100%;
-      padding: 20px;
-    }
-    #col2{
-      margin-left: 40px;
-      width: 100%;
-      padding: 20px;
-    }
-    
-
-  }
-  .fa{
-      color: white;
-    }
-    h6{
-      color: white;
-    }
-    h6:hover{
-      color: #16c7ff;
-    
-
-    }
-    .fa:hover{
-      color: #16c7ff;
-      
-      animation: swing ease-in-out 0.5s 1 alternate;
-      
-    }
-    #col1:hover{
-      color: #16c7ff;
-      text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5);
-      cursor: pointer;
-     
-
-
-    }
-    
-    #col2:hover{
-      color: #16c7ff;
-      text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5);
-      cursor: pointer;
-
-    }
+ @media screen and (min-width: 768px) {
+  
+ }
 </style>
 
-<div class="container-fluid" id="body" style="width: 76vw; margin-top: 3.5rem; height: 150vh; margin-left: -1rem;">
-
-    <div class="row pt-5">
-      <div class="col-md-4">
-       
-        <div id="card1" class="card1 rounded-0 p-0 shadow-sm">
-          <select name="" id="" class="select-box">
-            <option value="This month" selected>This month</option>
-            <option value="Last month">Last month</option>
-            <option value="This Quarter">This Quarter</option>
-            <option value="This Year">This Year</option>
-          </select>
-          <div class="grid-item">
-            <h4 style="margin-left: 2.5rem; padding-top: 1.5rem;">
-              <i class="fa fa-tachometer-alt" style="color: darkorange;"></i>
-              <span class="menu-icon">
-                <b>Sale</b>
-              </span>
-            </h4><br>
-            <svg width="15vw" style="margin-left: 14vw; margin-top: 6vh;" viewBox="0 0 1000 200"
-              preserveAspectRatio="xMinYMin meet" style="background-color: black;">
-              {% comment %}
-              <path d="M0 100 C100 150, 150 80, 300 150 S450 80, 500 150 S650 80, 700 100 S800 150, 1000 100"
-                fill="transparent" stroke="green" stroke-width="5" /> {% endcomment %}
-              <path d="M0 100 100 100, 150 100, 300 100 S100 100, 400 100 S100 100, 600 100 S100 100, 1200 100 S100 100"
-                fill="transparent" stroke="green" stroke-width="15" />
-            </svg>
-            <h4 style="margin-left: 2.5rem; margin-top: -7rem; font-size: 29px;" id="h4">
-              <i class="fa fa-rupee-sign"></i>
-              <span style="font-size: 34px;" id="s1">
-                00</span>.00
-            </h4>
-            <p style="font-size: 20px; color: #a9a9a9;; margin-left: 2.5rem;">
-              Total Sale (Sep)
-            </p>
-            <p style="font-size: 18px; color: orange; margin-left: 2.5rem; margin-top: 2rem;">
-              <i class="fa fa-arrow-down"></i>
-              100 %
-            </p>
-            <p style="font-size: px; color: #a9a9a9; margin-left: 2.5rem; margin-top: -1rem;">
-              This month growth
-            </p>
-            <p style="color: #a9a9a9; margin-left: 15.1vw; margin-top: 1vh;">
-              Report: From 01 Sep to 30 Sep
-            </p>
-
+<div class="body-wrapper">
+      <div class="container-fluid">
+        <!--  Row 1 -->
+        <div class="row mb-5 mt-3">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <a href=""  id="b1" class="btn  text-white" style="background-color: rgb(252, 3, 3,0.7);border-radius: 20px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">Add sale  <i class="fa fa-plus"></i></a>
+            <a href="" id="b2" class="btn  text-white" style="background-color: rgba(3, 161, 252, 0.7);border-radius: 20px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">Add Purchase  <i class="fa fa-plus"></i></a>
+            <a href="" id="b2" class="btn text-primary" style="border-radius: 20px;border: 1px solid rgb(40, 12, 222);background-color: white;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">Add sale  <i class="fa fa-plus"></i></a>
+          </div>
+          <div class="col"></div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 d-flex align-items-strech" >
+            <div class="card w-100" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
+              <div class="card-body">
+                <div class="d-sm-flex d-block align-items-center justify-content-between mb-9" >
+                  <div class="mb-3 mb-sm-0">
+                    <h5 class="card-title fw-semibold">Sales Overview</h5>
+                  </div>
+                  <div>
+                    <select class="form-select">
+                      <option value="1">Last Month</option>
+                      <option value="2">6 Months</option>
+                      <option value="3">1 Year</option>
+                      <option value="4">2 Years</option>
+                    </select>
+                  </div>
+                </div>
+                <div id="chart"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-lg-12">
+                <!-- Yearly Breakup -->
+                <div class="card overflow-hidden" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
+                  <div class="card-body p-4">
+                    <h5 class="card-title mb-9 fw-semibold">Yearly Breakup</h5>
+                    <div class="row align-items-center">
+                      <div class="col-8">
+                        <h4 class="fw-semibold mb-3">$36,358</h4>
+                        <div class="d-flex align-items-center mb-3">
+                          <span
+                            class="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-arrow-up-left text-success"></i>
+                          </span>
+                          <p class="text-dark me-1 fs-3 mb-0">+9%</p>
+                          <p class="fs-3 mb-0">last year</p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                          <div class="me-4">
+                            <span class="round-8 bg-primary rounded-circle me-2 d-inline-block"></span>
+                            <span class="fs-2">2023</span>
+                          </div>
+                          <div>
+                            <span class="round-8 bg-light-primary rounded-circle me-2 d-inline-block"></span>
+                            <span class="fs-2">2023</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                          <div id="breakup"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <!-- Monthly Earnings -->
+                <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
+                  <div class="card-body">
+                    <div class="row alig n-items-start">
+                      <div class="col-8">
+                        <h5 class="card-title mb-9 fw-semibold"> Monthly Earnings </h5>
+                        <h4 class="fw-semibold mb-3">$6,820</h4>
+                        <div class="d-flex align-items-center pb-1">
+                          <span
+                            class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-arrow-down-right text-danger"></i>
+                          </span>
+                          <p class="text-dark me-1 fs-3 mb-0">+9%</p>
+                          <p class="fs-3 mb-0">last year</p>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="d-flex justify-content-end">
+                          <div
+                            class="text-white bg-secondary rounded-circle p-6 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-currency-dollar fs-6"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="earning"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-
-      <div class="col-md-4" style="margin-left: 8vw;">
-        <div id="card2" class="card2 rounded-0 pb-0 shadow-sm">
-          <select name="" id="" class="select-box">
-            <option value="This month" selected>This month</option>
-            <option value="Last month">Last month</option>
-            <option value="This Quarter">This Quarter</option>
-            <option value="This Year">This Year</option>
-          </select>
-          <div class="grid-item">
-            <h5 style="margin-left: 2.5rem; padding-top: 1.5rem;">
-              <i class="fa fa-wallet" style="color: violet;"></i>
-              <span class="menu-icon">
-                Expenses
-              </span>
-            </h5><br>
-            <svg width="70%" style="margin-left: 3rem; margin-top: 6rem;" viewBox="0 0 1000 200"
-              preserveAspectRatio="xMinYMin meet" style="background-color: black;">
-              {% comment %}
-              <path d="M0 100 C100 150, 150 80, 300 150 S450 80, 500 150 S650 80, 700 100 S800 150, 1000 100"
-                fill="transparent" stroke="green" stroke-width="5" /> {% endcomment %}
-              <path d="M0 100 100 100, 150 100, 300 100 S100 100, 400 100 S100 100, 600 100 S100 100, 1000 100 S100 100"
-                fill="transparent" stroke="green" stroke-width="15" />
-            </svg>
-            <h4 style="margin-left: 53px; margin-top: -10rem; font-size: 20px;">
-              <i class="fa fa-rupee-sign"></i>
-              <span style="font-size: 25px;">
-                00</span>.00
-            </h4>
-            <p style="color: #a9a9a9; margin-left: 2.9rem; margin-top: 9.5rem;">
-              Report: From 01 Sep to 30 Sep
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <h1 class="icon" id="icon" style="text-align: center;justify-content: center; background-color: rgb(255, 255, 255,0.5);">
-    </h1>
-
-    <div class="row pt-4 pb-5" style="margin-top: 11rem;">
-      <div class="col-md-4">
-        <div id="card3" class="card3 rounded-0 pb-0 shadow-sm">
-          <div class="grid-item" style="height: 15rem;">
-            <h5 style="margin-left: 2.5rem; padding-top: 1.5rem;">
-              <i class="fa fa-arrow-down" style="color: lightgreen;"></i>
-              <span class="menu-icon">
-                You'll Receive
-              </span>
-            </h5><br>
-            <h4 style="margin-left: 53px; margin-top: -1.5rem; font-size: 20px;">
-              <i class="fa fa-rupee-sign"></i>
-              <span style="font-size: 25px;">
-                00</span>.00
-            </h4>
-            {% comment %} <p style="color: #a9a9a9; margin-left: 1.7rem; margin-top: 2rem;">
-              <b>Name</b> <span style="color: lightgreen; margin-left: 8rem;"><b>00</b></span>
-            </p>
-            <p style="color: #a9a9a9; margin-left: 1.7rem;">
-              <b>Name</b> <span style="color: lightgreen; margin-left: 8rem;"><b>00</b></span>
-            </p>
-            <p style="color: #a9a9a9; margin-left: 1.7rem;">
-              <b>Name</b> <span style="color: lightgreen; margin-left: 8rem;"><b>00</b></span>
-            </p> {% endcomment %}
-            <svg width="70%" style="margin-left: 2.5rem; margin-top: 2rem;" viewBox="0 0 1000 200"
-              preserveAspectRatio="xMinYMin meet" style="background-color: black;">
-              {% comment %}
-              <path d="M0 100 C100 150, 150 80, 300 150 S450 80, 500 150 S650 80, 700 100 S800 150, 1000 100"
-                fill="transparent" stroke="green" stroke-width="5" /> {% endcomment %}
-              <path d="M0 100 100 100, 150 100, 300 100 S100 100, 400 100 S100 100, 600 100 S100 100, 1000 100 S100 100"
-                fill="transparent" stroke="green" stroke-width="15" />
-            </svg>
-            <p style="color: #a9a9a9; margin-left: 2.3rem; margin-top: 2.5rem;">
-              Report: From 01 Sep to 30 Sep
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div id="card4" class="card4 rounded-0 pb-0 shadow-sm" style="margin-left: -8vw;">
-          <div class="grid-item" style="height: 15rem;">
-            <h5 style="margin-left: 2.5rem; padding-top: 1.5rem;">
-              <i class="fa fa-arrow-up" style="color: orange;"></i>
-              <span class="menu-icon">
-                You'll Pay
-              </span>
-            </h5><br>
-            <h4 style="margin-left: 53px; margin-top: -1.5rem; font-size: 20px;">
-              <i class="fa fa-rupee-sign"></i>
-              <span style="font-size: 25px;">
-                00</span>.00
-            </h4>
-            {% comment %} <p style="color: #a9a9a9; margin-left: 1.7rem; margin-top: 2rem;">
-              <b>Name</b> <span style="color: orange; margin-left: 8rem;"><b>00</b></span>
-            </p>
-            <p style="color: #a9a9a9; margin-left: 1.7rem;">
-              <b>Name</b> <span style="color: orange; margin-left: 8rem;"><b>00</b></span>
-            </p>
-            <p style="color: #a9a9a9; margin-left: 1.7rem;">
-              <b>Name</b> <span style="color: orange; margin-left: 8rem;"><b>00</b></span>
-            </p> {% endcomment %}
-            <svg width="70%" style="margin-left: 2.5rem; margin-top: 2rem;" viewBox="0 0 1000 200"
-              preserveAspectRatio="xMinYMin meet" style="background-color: black;">
-              {% comment %}
-              <path d="M0 100 C100 150, 150 80, 300 150 S450 80, 500 150 S650 80, 700 100 S800 150, 1000 100"
-                fill="transparent" stroke="green" stroke-width="5" /> {% endcomment %}
-              <path d="M0 100 100 100, 150 100, 300 100 S100 100, 400 100 S100 100, 600 100 S100 100, 1000 100 S100 100"
-                fill="transparent" stroke="green" stroke-width="15" />
-            </svg>
-            <p style="color: #a9a9a9; margin-left: 2.3rem; margin-top: 2.5rem;">
-              Report: From 01 Sep to 30 Sep
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div id="card5" class="card5 rounded-0 pb-0 shadow-sm" style="margin-left: -16vw;">
-          <select name="" id="" class="select-box" style="padding: 5px 5px;">
-            <option value="This month" selected>This month</option>
-            <option value="Last month">Last month</option>
-            <option value="This Quarter">This Quarter</option>
-            <option value="This Year">This Year</option>
-          </select>
-          <div class="grid-item" style="height: 15rem;">
-            <h5 style="margin-left: 25px; padding-top: 15px;">
-              <i class="fa fa-shopping-cart" style="color: lightblue;"></i>
-              <span class="menu-icon">
-                Purchase
-              </span>
-            </h5><br>
-            <h4 style="margin-left: 53px; margin-top: -1.5rem; font-size: 20px;">
-              <i class="fa fa-rupee-sign"></i>
-              <span style="font-size: 25px;">
-                00</span>.00
-            </h4>
-            <p style="color: #a9a9a9; margin-left: 2.5rem; margin-top: 3rem;">
-              You have no purchased items entered for selected time.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row p-3  mt-5 pt-5" style="width: 72vw;">
-      <div class="col-md-3 p-5 mt-1 mr-2" id="col1" style=" background-color: #454545;border: 1px solid white;">
-        <center>
-         <a href="{% url 'staff_request' %}">
-          <i class="fa fa-user-plus" style="font-size: 1.5em;"></i>
-          <h6 class="text-center mt-2.5" style="font-weight: bold;">EMPLOYEE REQUEST</h6>
-         </a>
-        </center>
-
-      </div>
-      <div class="col-md-3 p-5  mt-1 mr-2" id="col2" style="background-color: #454545;border: 1px solid white;">
-        <center>
-          <a href="{% url 'View_staff' %}">
-          <i class="fa fa-users" style="font-size: 1.5em;"></i>
-        <h6 class="text-center mt-2.5" style="font-weight: bold;">ALL EMPLOYEES</h6></a>
-        </center>
         
-      </div>
-      
-      
-    </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-8">
+                    <h5 class="card-title mb-9 fw-semibold">Expenses </h5>
 
-    <!-- Right sidebar -->
-    <div class="sidebar1" id="sidebar1" style="margin-top: 6.3rem; height: 45.65rem;">
-      <!-- Add 5 fieldsets -->
-      <div class="privacy text-white" style="height: 5rem; padding-top: 10px; border-radius: 250px;width: 18rem;">
-        <h6 style="margin-left: 1rem; padding-top: 10px;">Privacy</h6>
-        <!-- Add a small slider switch to the right of Privacy -->
-        <label class="small-switch" style="margin-left: 12vw;  margin-top: -20px;">
-          <input type="checkbox" id="btn" style="visibility: hidden;" onclick="action()">
-          <span class="slider1 round"></span>
-        </label>
-      </div>
+                  </div>
+                  <div class="col">
+                    <div>
+                      <select class="form-select">
+                        <option value="1">Last Month</option>
+                        <option value="2">6 Months</option>
+                        <option value="3">1 Year</option>
+                        <option value="4">2 Years</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" >
+                  <div class="col-md-7 ">
+                    
+                  <h4 class="fw-semibold mb-3 m-3">$6,820</h4>
+                  </div>
+                  
+                  <div class="col ">
+                    
+                    <div class="d-flex align-items-center pb-1 pt-3">
+                      <i class="fa fa-wallet text-primary pl-5" style="font-size: 40px;"></i>
+                      <span
+                        class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
+                        <i class="ti ti-arrow-up-left text-success"></i>
+                      </span>
+                      <p class="text-dark me-1 fs-3 mb-0">+9%</p>
+                      <p class="fs-3 mb-0">last year</p>
+                    </div>
+                  </div>
+                </div>  
 
+                
 
-      <div class="sn1" id="sn1">
-        <h6 style="color: #454545; padding-top: 15px;"><b>Stock Inventory</b></h6>
-      <div class="stock-value" id="stock-value" style="width: 18rem;">
-        <h6>Stock Value</h6>
-        <p><i class="fa fa-rupee-sign"></i>
-          <span style="font-size: 20px;"><b>00.</b></span>00
-        </p>
-      </div>
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-8">
+                    <h5 class="card-title mb-9 fw-semibold">Purchase</h5>
+                  </div>
+                  <div class="col-md-4">
+                    <div>
+                      <select class="form-select">
+                        <option value="1">Last Month</option>
+                        <option value="2">6 Months</option>
+                        <option value="3">1 Year</option>
+                        <option value="4">2 Years</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-7">
+                    
+                    <h4 class="fw-semibold mb-3 m-3">$5,820</h4>
+                    
+                    
+                  </div>
+                  
+                  <div class="col">
+                 
+                   
+                    
+                    <div class="d-flex align-items-center pb-1 pt-3">
+                      <i class="fa fa-shopping-cart text-primary pl-5" style="font-size: 40px;"></i>
+                      <span
+                    class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
+                    <i class="ti ti-arrow-down-right text-danger"></i>
+                  </span>
+                  <p class="text-dark me-1 fs-3 mb-0">+9%</p>
+                  <p class="fs-3 mb-0">last year</p>
+                     
+                     
+                    </div>
+                  </div>
+                </div>
 
-      <h6 style="padding-top: 15px;"></h6>
-      <div class="low-stocks" style="height: 8rem;width: 18rem;">
-        <h6>Low Stocks</h6>
-        <p class="text-center" style="font-size: 16px; margin: 1.5rem;">None of your stocks has low value</p>
-      </div>
-
-
-      <div class="cash-and-bank">
-        <h6 style="color: #454545; padding-top: 15px;"><b>Cash & Bank</b></h6>
-        <div class="cash-in-hand">
-          <h6>Cash in hand</h6>
-          <p><i class="fa fa-rupee-sign"></i>
-            <span style="font-size: 20px; color: lightgreen;"><b>00.</b></span>00
-          </p>
+              </div>
+            </div>
+          </div>
         </div>
+        <!-- <div class="row">
+          <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="card w-100">
+              <div class="card-body p-4">
+                <div class="mb-4">
+                  <h5 class="card-title fw-semibold">Recent Transactions</h5>
+                </div>
+                <ul class="timeline-widget mb-0 position-relative mb-n5">
+                  <li class="timeline-item d-flex position-relative overflow-hidden">
+                    <div class="timeline-time text-dark flex-shrink-0 text-end">09:30</div>
+                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                      <span class="timeline-badge border-2 border border-primary flex-shrink-0 my-8"></span>
+                      <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                    </div>
+                    <div class="timeline-desc fs-3 text-dark mt-n1">Payment received from John Doe of $385.90</div>
+                  </li>
+                  <li class="timeline-item d-flex position-relative overflow-hidden">
+                    <div class="timeline-time text-dark flex-shrink-0 text-end">10:00 am</div>
+                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                      <span class="timeline-badge border-2 border border-info flex-shrink-0 my-8"></span>
+                      <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                    </div>
+                    <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New sale recorded <a
+                        href="javascript:void(0)" class="text-primary d-block fw-normal">#ML-3467</a>
+                    </div>
+                  </li>
+                  <li class="timeline-item d-flex position-relative overflow-hidden">
+                    <div class="timeline-time text-dark flex-shrink-0 text-end">12:00 am</div>
+                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                      <span class="timeline-badge border-2 border border-success flex-shrink-0 my-8"></span>
+                      <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                    </div>
+                    <div class="timeline-desc fs-3 text-dark mt-n1">Payment was made of $64.95 to Michael</div>
+                  </li>
+                  <li class="timeline-item d-flex position-relative overflow-hidden">
+                    <div class="timeline-time text-dark flex-shrink-0 text-end">09:30 am</div>
+                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                      <span class="timeline-badge border-2 border border-warning flex-shrink-0 my-8"></span>
+                      <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                    </div>
+                    <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New sale recorded <a
+                        href="javascript:void(0)" class="text-primary d-block fw-normal">#ML-3467</a>
+                    </div>
+                  </li>
+                  <li class="timeline-item d-flex position-relative overflow-hidden">
+                    <div class="timeline-time text-dark flex-shrink-0 text-end">09:30 am</div>
+                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                      <span class="timeline-badge border-2 border border-danger flex-shrink-0 my-8"></span>
+                      <span class="timeline-badge-border d-block flex-shrink-0"></span>
+                    </div>
+                    <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New arrival recorded 
+                    </div>
+                  </li>
+                  <li class="timeline-item d-flex position-relative overflow-hidden">
+                    <div class="timeline-time text-dark flex-shrink-0 text-end">12:00 am</div>
+                    <div class="timeline-badge-wrap d-flex flex-column align-items-center">
+                      <span class="timeline-badge border-2 border border-success flex-shrink-0 my-8"></span>
+                    </div>
+                    <div class="timeline-desc fs-3 text-dark mt-n1">Payment Done</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 d-flex align-items-stretch">
+          
+          </div>
+        </div> -->
+        
+        
+
+       
       </div>
-
-      <h6 style="padding-top: 15px;"></h6>
-      <div class="bank-accounts" style="width: 18rem;">
-        <h6>Bank Accounts</h6>
-        <p><i class="fa fa-rupee-sign"></i>
-          <span style="font-size: 20px;"><b>00.</b></span>00
-        </p>
-        <p style="color: #a9a9a9; margin-left: 1.7rem; margin-top: 2rem; font-size: 16px;">
-          Axis <span style="color: lightgreen; margin-left: 8rem;"><b>00</b></span>
-        </p>
-        <p style="color: #a9a9a9; margin-left: 1.7rem; font-size: 16px;">
-          Cannara Bank <span style="color: lightgreen; margin-left: 3.8rem;"><b>00</b></span>
-        </p>
-        <p style="color: #a9a9a9; margin-left: 1.7rem; font-size: 16px;">
-          ICICI <span style="color: orange; margin-left: 7.8rem;"><b>00</b></span>
-        </p>
-      </div>
-      </div>
-
-    </div>
-  
-</div>
-
-<script>
-  function action() {
-    const b = document.getElementById('btn');
-    if (b.checked) {
-      document.getElementById('card1').style.display = 'none';
-      
-      document.getElementById('card2').style.display = 'none';
-      document.getElementById('card3').style.display = 'none';
-      document.getElementById('card4').style.display = 'none';
-      document.getElementById('card5').style.display = 'none';
-      document.getElementById('sn1').style.display = 'none';
-      document.getElementById('btn').style.display = 'block';
-
-      // document.getElementById('icon').style.border= "1px solid green";
-      // document.getElementById('icon').style.color= "green";
-      // document.getElementById('icon').style.backgroundColor= "rgb(255,255,255,0.5)";
-      
-
-      // document.getElementById('icon').innerHTML= "Privacy mode On";
-
-    } else {
-      document.getElementById('card1').style.display = 'block';
-      
-      document.getElementById('card2').style.display = 'block';
-      document.getElementById('card3').style.display = 'block';
-      document.getElementById('card4').style.display = 'block';
-      document.getElementById('card5').style.display = 'block';
-      document.getElementById('sn1').style.display = 'block';
-      document.getElementById('btn').style.display = 'block';
-
-      document.getElementById('icon').innerHTML=''
-    }
-  }
-</script>
-
-{% endblock content %}
+  </div> 
+ 
+{% endblock  %}

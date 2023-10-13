@@ -34,5 +34,8 @@ class staff_details(models.Model):
     contact = models.IntegerField(null=True,blank=True)
     img = models.ImageField(null=True,blank = True,upload_to = 'image/staff')    
     Action = models.IntegerField(null=True,default=0)
+
+class payment_terms(models.Model):
+    time_periods  = models.CharField(max_length=100,null=True,blank=True)   
   
   
