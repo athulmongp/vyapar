@@ -43,16 +43,43 @@
               <a class="sidebar-link" href="{% url 'homepage' %}" aria-expanded="false" style="color: black; background-color: rgb(210, 235, 241,0.5);">
                 <i class="ti ti-layout-dashboard"></i>
               </span>
-              <span class="hide-menu">Dashboard</span>
+              <span class="hide-menu"><b>Dashboard</b></span>
               </a>
             </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link mt-2 nav-icon-hover" href="" aria-expanded="false" style="color: black;background-color: rgb(210, 235, 241,0.5);"
+              data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                <span>
+                  <i class="fa fa-briefcase" style="font-size: 20px;"></i>
+                </span>
+                <span class="hide-menu" style="margin-right: 40px;"><b>Employees </b></span>
+                <!-- <i class="fa fa-plus ml-5 pl-5" style="vertical-align: middle; float: right;"></i> -->
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                <div class="message-body">
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <i class="fa fa-user-plus fs-6"></i>
+                    <p class="mb-0 fs-3"><b>Request Employees</b></p>
+                  </a>
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <i class="fa fa-briefcase fs-6"></i>
+                    <p class="mb-0 fs-3"><b>All Employees</b></p>
+                  </a>
+                  
+                  
+                </div>
+              </div>
+            </li>
+            
            
             <li class="sidebar-item">
               <a class="sidebar-link mt-2" href="" aria-expanded="false" style="color: black;background-color: rgb(210, 235, 241,0.5);">
                 <span>
                   <i class="ti ti-users"></i>
                 </span>
-                <span class="hide-menu">Parties</span>
+                <span class="hide-menu"><b>Parties</b></span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -60,7 +87,7 @@
                 <span>
                   <i class="fa fa-th"></i>
                 </span>
-                <span class="hide-menu">Items</span>
+                <span class="hide-menu"><b>Items</b></span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -68,7 +95,7 @@
                 <span>
                   <i class="fa fa-tachometer-alt"></i>
                 </span>
-                <span class="hide-menu">Sales</span>
+                <span class="hide-menu"><b>Sales</b></span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -76,7 +103,7 @@
                 <span>
                   <i class="fa fa-shopping-cart"></i>
                 </span>
-                <span class="hide-menu">Purchase</span>
+                <span class="hide-menu"><b>Purchase</b></span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -84,7 +111,7 @@
                 <span>
                   <i class="fa fa-wallet"></i>
                 </span>
-                <span class="hide-menu">Expenses</span>
+                <span class="hide-menu"><b>Expenses</b></span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -92,7 +119,7 @@
                 <span>
                   <i class="fa fa-landmark"></i>
                 </span>
-                <span class="hide-menu">Cash & Bank</span>
+                <span class="hide-menu"><b>Cash & Bank</b></span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -102,7 +129,7 @@
                 <span>
                   <i class="fa fa-chart-line"></i>
                 </span>
-                <span class="hide-menu">Reports</span>
+                <span class="hide-menu"><b>Reports</b></span>
               </a>
               <!-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                 <div class="message-body">

@@ -310,5 +310,9 @@ def View_staff(request):
 
   return render(request, 'company/view_staff.html',{'staff':staff,'company':company,'allstaff':allstaff})
 
+def payment_terms(request):
+  
+  return render(request,'admin/payment_terms.html')
+
 
 

@@ -44,6 +44,7 @@ urlpatterns = [
     path('client_request', views.client_request, name='client_request'),
     path('client_details', views.client_details, name='client_details'),
     path('staff_request', views.staff_request, name='staff_request'),
+    path('payment_terms', views.payment_terms, name='payment_terms'),
     
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     
