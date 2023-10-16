@@ -5,78 +5,55 @@
 {% block content %}
 {% load static %}
 
+<style>
+  table tr td:hover {
+  cursor: pointer;
+}
+</style>
+<body  style="background-color: rgba(176, 199, 205, 0.4);">
+  
 
-<body style="width: 100%;height: 100vh;">
-    
-        
-    <div class="container-fluid mt-5 pt-5 p-3 pr-5" style="height: 100vh;">
-      <div class="row p-3">
-        {% for d in data %}
-         
-        <div class="col-md-4">
-          <div class="card m-5 text-center" style="text-align: justify; width: 90%; height: 350px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);background-color: #454545;color: white;">
-            <center>
-                {% if d.profile_pic %}
-            <img class="img-xs rounded-circle mt-4" style="height: 70px; width: 70px;" src="{{ d.profile_pic.url }}"
-              alt="" >
-            {% else %}
-            <img class="img-xs rounded-circle mt-4" style="height: 70px; width: 70px;"
-              src="{% static 'images/default.jpg' %}" class="rounded-circle">
-            {% endif %}
-            </center>
-            <div class="card-header">
-                <h2 class="text-center"><b>{{d.company_name}}</b></h2>
-            </div>
-            <div class="card-body">
-                Owner : <b> {{d.user.first_name}} {{d.user.last_name}} </b><br>
-                Email : <b>{{d.user.email}}</b> <br>
-                Payment Terms : <b>{{d.dateperiod}}</b><br>
-                End Date : <b>{{d.End_date}}</b>
-                
-                    <div class="row mt-4 p-1 justify-content-center">
-                        
-            
-                        <div class="col-md-5" style="width: 100%;"><a href="{% url 'adminaccept' d.id %}"><button class="btn-primary" style="width: 100%;padding: 5px;font-weight: bold;border-radius: 10px;">Accept</button></a></div>
-                        <div class="col-md-5" style="width: 100%;"><a href="{% url 'adminreject' d.id %}"><button class="btn-danger" style="width: 100%;padding: 5px;font-weight: bold;border-radius: 10px;">Reject</button></a></div>
 
-                    
-                    </div>
-                
-            </div>
-            
-        </div>
-        </div>
-      
-    {% endfor %}
-      </div>
+<div class="body-wrapper">
+  <div class="container-fluid">
 
-        <!-- <h3 class="text-center"><b style="color: rgb(158, 213, 245);text-shadow: 2px 2px 4px #000000; margin-bottom: 40px;">All Company</b></h3>
-        
-        <table class="table table-hover mt-5">
+  
+
+     <!-- <h3 class="text-center"><b style="color: rgb(158, 213, 245);text-shadow: 2px 2px 4px #000000; margin-bottom: 40px;">All Company</b></h3> -->
+      <div style="overflow-x:auto;">  
+        <table class="table table-hover  mt-5 " style="background-color: white;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
             <thead>
               <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Company Name</th>
-                <th scope="col">Email</th>
+                <th scope="col" style="color: black;"><b>ID</b></th>
+                <th scope="col" style="color: black;"><b>Company Name</b></th>
+                <th scope="col" style="color: black;"><b>Email</b></th>
                 
-                <th scope="col">Contact</th>
-                <th scope="col">Time Period</th>
+                <th scope="col" style="color: black;"><b>Contact</b></th>
+                <th scope="col" style="color: black;"><b>Payment Terms</b></th>
+                <th scope="col" style="color: black;"><b>End Date</b></th>
+                <th scope="col" style="color: black;"><b>Action</b></th>
+
               </tr>
             </thead>
             <tbody>
-                {% for a in all %}
+                {% for a in data %}
               <tr>
                 <td>{{a.id}}</th>
-                <td> {{a.company_name}} </td>
+                <td> <b>{{a.company_name}} </b></td>
                 <td>{{a.user.email}}</td>
                 <td>{{a.contact}}</td>
-                <td>{{a.dateperiod}}</td>
+                <td>{{a.dateperiod.payment_terms_number}} {{a.dateperiod.payment_terms_value}}</td>
+                <td>{{a.End_date}}</td>
+                <td><a href="{% url 'adminaccept' a.id %}" class="btn btn-primary m-1">Accept</a>
+                <a href="{% url 'adminreject' a.id %}" class="btn btn-danger m-1">Reject</a></td>
               </tr>
               {% endfor %}
             </tbody>
-          </table> -->
-    </div>
+          </table> 
+        </div>
 
+  </div>
+</div>
 </body>
 
 {% endblock content %}

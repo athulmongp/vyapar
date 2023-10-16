@@ -37,6 +37,7 @@
         </div>
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="" >
+          
           <ul id="sidebarnav ">
            
             <li class="sidebar-item mt-3">
@@ -53,7 +54,7 @@
                 <span>
                   <i class="fa fa-briefcase" style="font-size: 20px;"></i>
                 </span>
-                <span class="hide-menu" style="margin-right: 40px;"><b>Employees </b></span>
+                <span class="hide-menu" style="margin-right: 30%;"><b>Employees </b></span>
                 <!-- <i class="fa fa-plus ml-5 pl-5" style="vertical-align: middle; float: right;"></i> -->
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
               </a>
@@ -90,22 +91,111 @@
                 <span class="hide-menu"><b>Items</b></span>
               </a>
             </li>
+           
             <li class="sidebar-item">
-              <a class="sidebar-link mt-2" href="" aria-expanded="false" style="color: black;background-color: rgb(210, 235, 241,0.5);">
+              <a class="sidebar-link mt-2 nav-icon-hover" href="" aria-expanded="false" style="color: black;background-color: rgb(210, 235, 241,0.5);"
+              data-bs-toggle="dropdown"
+                  aria-expanded="false">
                 <span>
                   <i class="fa fa-tachometer-alt"></i>
                 </span>
-                <span class="hide-menu"><b>Sales</b></span>
+                <span class="hide-menu" style="margin-right: 50%;"><b >Sales</b></span>
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
               </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                <div class="message-body">
+                  {% if allmodules.sales_invoice != Null %}
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <!-- <i class="ti ti-mail fs-6"></i> -->
+                    <p class="mb-0 fs-3">Sale Invoices</p>
+                  </a>
+                  {% endif %}
+                  {% if allmodules.Estimate != Null %}
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <!-- <i class="ti ti-mail fs-6"></i> -->
+                    <p class="mb-0 fs-3">Estimate/ Quotation</p>
+                  </a>
+                  {% endif %}
+                  {% if allmodules.Payment_in != Null %}
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <!-- <i class="ti ti-list-check fs-6"></i> -->
+                    <p class="mb-0 fs-3">Payment In</p>
+                  </a>
+                  {% endif %}
+                  {% if allmodules.sales_order != Null %}
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <!-- <i class="ti ti-user fs-6"></i> -->
+                    <p class="mb-0 fs-3">Sale Order</p>
+                  </a>
+                  {% endif %}
+                  {% if allmodules.Delivery_challan != Null %}
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <!-- <i class="ti ti-mail fs-6"></i> -->
+                    <p class="mb-0 fs-3">Delivery Challan</p>
+                  </a>
+                  {% endif %}
+                  {% if allmodules.sales_return != Null %}
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <!-- <i class="ti ti-list-check fs-6"></i> -->
+                    <p class="mb-0 fs-3">Sale Return/ Cr. Note</p>
+                  </a>
+                  {% endif %}
+                  
+                  
+                </div>
+              </div>
             </li>
-            <li class="sidebar-item">
+            <!-- <li class="sidebar-item">
               <a class="sidebar-link mt-2" href="" aria-expanded="false" style="color: black;background-color: rgb(210, 235, 241,0.5);">
                 <span>
                   <i class="fa fa-shopping-cart"></i>
                 </span>
                 <span class="hide-menu"><b>Purchase</b></span>
               </a>
+            </li> -->
+            <li class="sidebar-item">
+              <a class="sidebar-link mt-2 nav-icon-hover" href="" aria-expanded="false" style="color: black;background-color: rgb(210, 235, 241,0.5);"
+              data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                <span>
+                  <i class="fa fa-shopping-cart"></i>
+                </span>
+                <span class="hide-menu" style="margin-right: 40%;"><b >Purchase</b></span>
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                <div class="message-body">
+                  {% if allmodules.Purchase_bills != Null %}
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <!-- <i class="ti ti-mail fs-6"></i> -->
+                    <p class="mb-0 fs-3">Purchase Bills</p>
+                  </a>
+                  {% endif %}
+                  {% if allmodules.Payment_out != Null %}
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <!-- <i class="ti ti-mail fs-6"></i> -->
+                    <p class="mb-0 fs-3">Payment Out</p>
+                  </a>
+                  {% endif %}
+                  {% if allmodules.Purchase_order != Null %}
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <!-- <i class="ti ti-list-check fs-6"></i> -->
+                    <p class="mb-0 fs-3">Purchase Order</p>
+                  </a>
+                  {% endif %}
+                  {% if allmodules.Purchase_return != Null %}
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <!-- <i class="ti ti-user fs-6"></i> -->
+                    <p class="mb-0 fs-3">Purchase Return/ Dr. Note</p>
+                  </a>
+                  {% endif %}
+                  
+                  
+                  
+                </div>
+              </div>
             </li>
+
             <li class="sidebar-item">
               <a class="sidebar-link mt-2" href="" aria-expanded="false" style="color: black;background-color: rgb(210, 235, 241,0.5);">
                 <span>
@@ -114,13 +204,55 @@
                 <span class="hide-menu"><b>Expenses</b></span>
               </a>
             </li>
-            <li class="sidebar-item">
+            <!-- <li class="sidebar-item">
               <a class="sidebar-link mt-2" href="" aria-expanded="false" style="color: black;background-color: rgb(210, 235, 241,0.5);">
                 <span>
                   <i class="fa fa-landmark"></i>
                 </span>
                 <span class="hide-menu"><b>Cash & Bank</b></span>
               </a>
+            </li> -->
+            <li class="sidebar-item">
+              <a class="sidebar-link mt-2 nav-icon-hover" href="" aria-expanded="false" style="color: black;background-color: rgb(210, 235, 241,0.5);"
+              data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                <span>
+                  <i class="fa fa-landmark"></i>
+                </span>
+                <span class="hide-menu" style="margin-right: 30%;"><b >Cash & Bank</b></span>
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                <div class="message-body">
+                  {% if allmodules.Bank_account != Null %}
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <!-- <i class="ti ti-mail fs-6"></i> -->
+                    <p class="mb-0 fs-3">Bank Accounts</p>
+                  </a>
+                  {% endif %}
+                  {% if allmodules.Cash_in_hand != Null %}
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <!-- <i class="ti ti-mail fs-6"></i> -->
+                    <p class="mb-0 fs-3">Cash In Hand</p>
+                  </a>
+                  {% endif %}
+                  {% if allmodules.cheques != Null %}
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <!-- <i class="ti ti-list-check fs-6"></i> -->
+                    <p class="mb-0 fs-3">Cheques</p>
+                  </a>
+                  {% endif %}
+                  {% if allmodules.Loan_account != Null %}
+                  <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                    <!-- <i class="ti ti-user fs-6"></i> -->
+                    <p class="mb-0 fs-3">Loan Accounts</p>
+                  </a>
+                  {% endif %}
+                  
+                  
+                  
+                </div>
+              </div>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link mt-2 nav-icon-hover" href="" aria-expanded="false" style="color: black;background-color: rgb(210, 235, 241,0.5);"
@@ -231,6 +363,8 @@
                   {% else %}
                   <img src="{% static 'assets/images/profile/user-1.jpg' %}" alt="" width="35" height="35" class="rounded-circle">
                   {% endif %}
+
+                  <h5 style="font-family: 'Times New Roman', Times, serif;padding-left: 5px;"><b>{{company.company_name}}</b></h5>
                   
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">

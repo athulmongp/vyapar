@@ -44,7 +44,11 @@ urlpatterns = [
     path('client_request', views.client_request, name='client_request'),
     path('client_details', views.client_details, name='client_details'),
     path('staff_request', views.staff_request, name='staff_request'),
-    path('payment_terms', views.payment_terms, name='payment_terms'),
+    path('payment_term', views.payment_term, name='payment_term'),
+    path('add_payment_terms', views.add_payment_terms, name='add_payment_terms'),
+    path('Allmodule/<uid>', views.Allmodule, name='Allmodule'),
+    path('addmodules/<uid>', views.addmodules, name='addmodules'),
+    
     
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     

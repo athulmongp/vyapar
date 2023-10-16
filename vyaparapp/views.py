@@ -6,6 +6,9 @@ from django.contrib import messages
 from . models import *
 import json
 from django.http.response import JsonResponse
+from django.utils.crypto import get_random_string
+from datetime import date
+from datetime import timedelta
 
 # Create your views here.
 def home(request):
@@ -15,9 +18,11 @@ def home(request):
 
     
 def homepage(request):
-  company =  company_details.objects.get(user = request.user)
+  com =  company.objects.get(user = request.user)
+  allmodules= modules_list.objects.get(company=com.id)
   context = {
-              'company' : company
+              'company' : com,
+              'allmodules':allmodules
           }
   return render(request, 'company/homepage.html', context)
 
@@ -42,18 +47,18 @@ def logout(request):
     return redirect('/')
 
 def view_profile(request):
-  company =  company_details.objects.get(user = request.user) 
+  com =  company.objects.get(user = request.user) 
   selected_options = request.session.get('selected_options', None)
   
   context = {
-              'company' : company,
+              'company' : com,
               'selected_options': json.dumps(selected_options)
           }
   return render(request,'profile.html',context)
   
 def edit_profile(request,pk):
-  company = company_details.objects.get(id = pk)
-  user1 = User.objects.get(id = company.user_id)
+  com= company.objects.get(id = pk)
+  user1 = User.objects.get(id = com.user_id)
   selected_options = request.session.get('selected_options', None)
 
   if request.method == "POST":
@@ -61,27 +66,27 @@ def edit_profile(request,pk):
       user1.first_name = capfirst(request.POST.get('f_name'))
       user1.last_name  = capfirst(request.POST.get('l_name'))
       user1.email = request.POST.get('email')
-      company.contact_number = request.POST.get('cnum')
-      company.address = capfirst(request.POST.get('ards'))
-      company.company_name = request.POST.get('comp_name')
-      company.company_email = request.POST.get('comp_email')
-      company.city = request.POST.get('city')
-      company.state = request.POST.get('state')
-      company.country = request.POST.get('country')
-      company.pincode = request.POST.get('pinc')
-      company.gst_num = request.POST.get('gst')
-      company.pan_num = request.POST.get('pan')
-      company.business_name = request.POST.get('bname')
-      company.company_type = request.POST.get('comp_type')
+      com.contact_number = request.POST.get('cnum')
+      com.address = capfirst(request.POST.get('ards'))
+      com.company_name = request.POST.get('comp_name')
+      com.company_email = request.POST.get('comp_email')
+      com.city = request.POST.get('city')
+      com.state = request.POST.get('state')
+      com.country = request.POST.get('country')
+      com.pincode = request.POST.get('pinc')
+      com.gst_num = request.POST.get('gst')
+      com.pan_num = request.POST.get('pan')
+      com.business_name = request.POST.get('bname')
+      com.company_type = request.POST.get('comp_type')
       if len(request.FILES)!=0 :
-          company.profile_pic = request.FILES.get('file')
+          com.profile_pic = request.FILES.get('file')
 
-      company.save()
+      com.save()
       user1.save()
       return redirect('view_profile')
 
   context = {
-      'company' : company,
+      'company' : com,
       'user1' : user1,
       'selected_options': json.dumps(selected_options)
   } 
@@ -109,11 +114,11 @@ def sale_return_cr(request):
 
 # created by athul
 def settings(request):
-  company =  company_details.objects.get(user = request.user)
+  com =  company.objects.get(user = request.user)
   selected_options = request.session.get('selected_options', None)
   
   context = {
-              'company' : company,
+              'company' : com,
               'selected_options': json.dumps(selected_options),
               
           }
@@ -121,14 +126,14 @@ def settings(request):
 
 def hide_options(request):
     
-    company =  company_details.objects.get(user = request.user)
+    com =  company.objects.get(user = request.user)
     if request.method == 'POST':
         selected_options = list(request.POST.getlist('selected_options'))
 
     request.session['selected_options'] = selected_options
     
     context = {'selected_options': json.dumps(selected_options),
-               'company' : company}
+               'company' : com}
    
     return render(request, 'company/homepage.html', context)
 
@@ -163,46 +168,69 @@ def register(request):
         user_data.save()
         
         data = User.objects.get(id = user_data.id)
-        cust_data = company_details( contact=mobile,
+        cust_data = company( contact=mobile,
                              user = data)
         cust_data.save()
-        messages.success(request, 'Welcome'+ ' ' +  data.first_name +' '+data.last_name + ' '+ 'Please Login')
+        
         return redirect('company_reg2')
       else:
         messages.info(request, 'Sorry, Email already exists')
         return redirect('company_reg')
     return render(request,'company/register.html')  
 def company_reg2(request):
+  terms=payment_terms.objects.all()
   
-  return render(request,'company/register2.html')  
+  return render(request,'company/register2.html',{'terms':terms})  
 def add_company(request):
   
   print(id)
   if request.method == 'POST':
     email=request.POST['email']
     user=User.objects.get(email=email)
-    company = company_details.objects.get(user = user)
-    company.company_name=request.POST['cname']
+    
+    c =company.objects.get(user = user)
+    c.company_name=request.POST['cname']
 
-    company.address=request.POST['address']
-    company.city=request.POST['city']
-    company.state=request.POST['state']
-    company.country=request.POST['country']
-    company.pincode=request.POST['pincode']
-    company.pan_number=request.POST['pannumber']
-    company.gst_type=request.POST['gsttype']
-    company.gst_no=request.POST['gstno']
-    company.profile_pic=request.FILES.get('image')
-    company.dateperiod=request.POST['select']
-    company.End_date=request.POST['end']
+    c.address=request.POST['address']
+    c.city=request.POST['city']
+    c.state=request.POST['state']
+    c.country=request.POST['country']
+    c.pincode=request.POST['pincode']
+    c.pan_number=request.POST['pannumber']
+    c.gst_type=request.POST['gsttype']
+    c.gst_no=request.POST['gstno']
+    c.profile_pic=request.FILES.get('image')
+
+    select=request.POST['select']
+    terms=payment_terms.objects.get(id=select)
+    c.dateperiod=terms
+    c.start_date=date.today()
+    days=int(terms.days)
+
+    
+    end= date.today() + timedelta(days=days)
+    c.End_date=end
+
+
+    
+    
+
+    code=get_random_string(length=6)
+    if company.objects.filter(Company_code = code).exists():
+       code2=get_random_string(length=6)
+       c.Company_code=code2
+    else:
+      c.Company_code=code
+
    
-    company.save()
+    c.save()
+    # messages.success(request, 'Welcome'+ ' ' +  user.first_name +' '+user.last_name + ' ')
 
-    return redirect('home')  
+    return redirect('Allmodule',user.id)  
   return render(request,'company/register2.html')   
 
 def staff_register(request):
-  company=company_details.objects.all()
+  company=company.objects.all()
 
   return render(request, 'staff/staffreg.html',{'company':company})
 
@@ -215,7 +243,7 @@ def staff_registraction(request):
     pas=request.POST['pass']
     ph=request.POST['ph']
     cid=request.POST['select']
-    company=company_details.objects.get(id=cid)
+    company=company.objects.get(id=cid)
     img=request.FILES.get('image')
 
     if staff_details.objects.filter(user_name=un).exists():
@@ -251,7 +279,7 @@ def login(request):
       if request.user.is_staff==1:
         return redirect('adminhome')
       else:
-        data=company_details.objects.get(user=request.user)
+        data=company.objects.get(user=request.user)
         if data.Action == 1:
           return redirect('homepage')
         else:
@@ -270,13 +298,13 @@ def login(request):
       messages.info(request, 'Invalid Username or Password. Try Again.')
       return redirect('log_page')
 def adminaccept(request,id):
-  data=company_details.objects.filter(id=id).update(Action=1)
-  return redirect('adminhome')
+  data=company.objects.filter(id=id).update(Action=1)
+  return redirect('client_request')
 def adminreject(request,id):
-  data=company_details.objects.get(id=id)
+  data=company.objects.get(id=id)
   data.user.delete()
   data.delete()
-  return redirect('adminhome')
+  return redirect('client_request')
 
 
 
@@ -291,28 +319,82 @@ def companyreject(request,id):
   return redirect('staff_request')
 
 def client_request(request):
-  data = company_details.objects.filter(Action = 0).order_by('-id')
-  all = company_details.objects.filter(Action = 1)
+  data = company.objects.filter(Action = 0).order_by('-id')
+  all = company.objects.filter(Action = 1)
   return render(request,'admin/client_request.html',{'data': data,'all':all})
 
 def client_details(request):
-  data = company_details.objects.filter(Action = 1).order_by('-id')
+  data = company.objects.filter(Action = 1).order_by('-id')
   return render(request,'admin/client_details.html',{"data":data})
 
 def staff_request(request):
-  company =  company_details.objects.get(user = request.user)
-  staff = staff_details.objects.filter(company=company,Action=0).order_by('-id')
+  com =  company.objects.get(user = request.user)
+  staff = staff_details.objects.filter(company=com,Action=0).order_by('-id')
   return render(request,'company/staff_request.html',{'staff':staff,'company':company})  
 def View_staff(request):
-  company =  company_details.objects.get(user = request.user)
-  staff = staff_details.objects.filter(company=company,Action=0)
-  allstaff = staff_details.objects.filter(company=company,Action=1).order_by('-id')
+  com =  company.objects.get(user = request.user)
+  staff = staff_details.objects.filter(company=com,Action=0)
+  allstaff = staff_details.objects.filter(company=com,Action=1).order_by('-id')
 
-  return render(request, 'company/view_staff.html',{'staff':staff,'company':company,'allstaff':allstaff})
+  return render(request, 'company/view_staff.html',{'staff':staff,'company':com,'allstaff':allstaff})
 
-def payment_terms(request):
+def payment_term(request):
+  terms = payment_terms.objects.all()
   
-  return render(request,'admin/payment_terms.html')
+  return render(request,'admin/payment_terms.html',{'terms':terms})
+def add_payment_terms(request):
+  if request.method == 'POST':
+    num=int(request.POST['num'])
+    select=request.POST['select']
+    if select == 'Years':
+      days=int(num)*365
+      pt = payment_terms(payment_terms_number = num,payment_terms_value = select,days = days)
+      pt.save()
+      messages.info(request, 'Payment term is added')
+      return redirect('payment_term')
+
+    else:  
+      days=int(num*30)
+      pt = payment_terms(payment_terms_number = num,payment_terms_value = select,days = days)
+      pt.save()
+      messages.info(request, 'Payment term is added')
+      return redirect('payment_term')
+
+
+  return redirect('payment_term')
+
+def Allmodule(request,uid):
+  user=User.objects.get(id=uid)
+  return render(request,'company/modules.html',{'user':user})
+
+def addmodules(request,uid):
+  if request.method == 'POST':
+    com=company.objects.get(user=uid)
+    c1=request.POST.get('c1')
+    c2=request.POST.get('c2')
+    c3=request.POST.get('c3')
+    c4=request.POST.get('c4')
+    c5=request.POST.get('c5')
+    c6=request.POST.get('c6')
+    c7=request.POST.get('c7')
+    c8=request.POST.get('c8')
+    c9=request.POST.get('c9')
+    c10=request.POST.get('c10')
+    c11=request.POST.get('c11')
+    c12=request.POST.get('c12')
+    c13=request.POST.get('c13')
+    c14=request.POST.get('c14')
+    
+    data=modules_list(company=com,sales_invoice = c1,
+                      Estimate=c2,Payment_in=c3,sales_order=c4,
+                      Delivery_challan=c5,sales_return=c6,Purchase_bills=c7,
+                      Payment_out=c8,Purchase_order=c9,Purchase_return=c10,
+                      Bank_account=c11,Cash_in_hand=c12, cheques=c13,Loan_account=c14)
+    data.save()
+
+    return redirect('log_page')
+
+
 
 
 

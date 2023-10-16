@@ -409,6 +409,7 @@
         <h1 class="text-center" id="h1"
             style="color: rgb(255, 255, 255);text-shadow: 2px 2px 4px #000000; margin-bottom: 40px;">COMPANY REGISTERATION
         </h1>
+        
         <div class="row "
             style="border: 1px solid black;width: 100%; border-radius: 20px;background-color: white;box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.9), 0 6px 20px 0 rgba(0, 0, 0, 0.9);">
             <div class="col-lg-6 col-md-10 d-flex "
@@ -430,6 +431,11 @@
                         <form id="form" class="mt-2" method="post" action="{% url 'register' %}"
                             enctype="multipart/form-data" >
                             <h3 class="text-center mb-5" style="color: rgb(255, 255, 255);text-shadow: 2px 2px 4px #000000;font-weight: bold;">Basic information</h3>
+                            {% if messages %}
+                            {% for message in messages %}
+                                <label for="" class="text-center" style="background-color: rgb(255, 0, 0,0.5); width: 100%;color:white;text-shadow: 2px 2px 4px #000000;padding: 10px; border-radius: 10px;">{{message}}</label>
+                            {% endfor %}
+                         {% endif %}
 
 
                             <div class="form-group ">

@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'vyapar.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'infoxtec_vyapar',
+        'NAME': 'infoxtec_vyapar3',
         'USER':'root',
         'PASSWORD':'',
         'HOST':'localhost',
