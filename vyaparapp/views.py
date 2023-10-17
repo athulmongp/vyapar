@@ -28,8 +28,11 @@ def homepage(request):
 
 def staffhome(request,id):
   staff =  staff_details.objects.get(id=id)
+  allmodules= modules_list.objects.get(company=staff.company)
   context = {
-              'staff' : staff
+              'staff' : staff,
+              'allmodules':allmodules
+
           }
   return render(request, 'staff/staffhome.html', context)
 def adminhome(request):
@@ -230,9 +233,9 @@ def add_company(request):
   return render(request,'company/register2.html')   
 
 def staff_register(request):
-  company=company.objects.all()
+  com=company.objects.all()
 
-  return render(request, 'staff/staffreg.html',{'company':company})
+  return render(request, 'staff/staffreg.html',{'company':com})
 
 def staff_registraction(request):
   if request.method == 'POST':
@@ -242,19 +245,21 @@ def staff_registraction(request):
     un=request.POST['uname']
     pas=request.POST['pass']
     ph=request.POST['ph']
-    cid=request.POST['select']
-    company=company.objects.get(id=cid)
+    code=request.POST['code']
+    com=company.objects.get(Company_code=code)
     img=request.FILES.get('image')
 
     if staff_details.objects.filter(user_name=un).exists():
+      messages.info(request, 'Sorry, Username already exists')
       print("1")
       return redirect('staff_register')
     elif staff_details.objects.filter(email=email).exists():
+      messages.info(request, 'Sorry, Email already exists')
       print("2")
       return redirect('staff_register')
     else:
       
-      staff=staff_details(first_name=fn,last_name=ln,email=email,user_name=un,password=pas,contact=ph,img=img,company=company)
+      staff=staff_details(first_name=fn,last_name=ln,email=email,user_name=un,password=pas,contact=ph,img=img,company=com)
       staff.save()
       print("success")
       return redirect('log_page')
@@ -323,20 +328,32 @@ def client_request(request):
   all = company.objects.filter(Action = 1)
   return render(request,'admin/client_request.html',{'data': data,'all':all})
 
+def client_request_overview(request,id): 
+  com = company.objects.get(id=id)
+  allmodules=modules_list.objects.get(company=id)
+  return render(request,'admin/client_request_overview.html',{'company':com,'allmodules':allmodules})
+
 def client_details(request):
   data = company.objects.filter(Action = 1).order_by('-id')
   return render(request,'admin/client_details.html',{"data":data})
+def client_details_overview(request,id): 
+  com = company.objects.get(id=id)
+  allmodules=modules_list.objects.get(company=id)
+  return render(request,'admin/client_details_overview.html',{'company':com,'allmodules':allmodules})
 
 def staff_request(request):
   com =  company.objects.get(user = request.user)
   staff = staff_details.objects.filter(company=com,Action=0).order_by('-id')
-  return render(request,'company/staff_request.html',{'staff':staff,'company':company})  
+  allmodules= modules_list.objects.get(company=com.id)
+  return render(request,'company/staff_request.html',{'staff':staff,'company':com,'allmodules':allmodules}) 
+ 
 def View_staff(request):
   com =  company.objects.get(user = request.user)
   staff = staff_details.objects.filter(company=com,Action=0)
   allstaff = staff_details.objects.filter(company=com,Action=1).order_by('-id')
+  allmodules= modules_list.objects.get(company=com.id)
 
-  return render(request, 'company/view_staff.html',{'staff':staff,'company':com,'allstaff':allstaff})
+  return render(request, 'company/view_staff.html',{'staff':staff,'company':com,'allstaff':allstaff,'allmodules':allmodules})
 
 def payment_term(request):
   terms = payment_terms.objects.all()

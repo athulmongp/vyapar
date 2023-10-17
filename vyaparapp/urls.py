@@ -48,6 +48,8 @@ urlpatterns = [
     path('add_payment_terms', views.add_payment_terms, name='add_payment_terms'),
     path('Allmodule/<uid>', views.Allmodule, name='Allmodule'),
     path('addmodules/<uid>', views.addmodules, name='addmodules'),
+    path('client_request_overview/<id>', views.client_request_overview, name='client_request_overview'),
+     path('client_details_overview/<id>', views.client_details_overview, name='client_details_overview'),
     
     
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),

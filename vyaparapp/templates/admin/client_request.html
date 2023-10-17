@@ -39,7 +39,7 @@
                 {% for a in data %}
               <tr>
                 <td>{{a.id}}</th>
-                <td> <b>{{a.company_name}} </b></td>
+                <td> <b><a href="{% url 'client_request_overview' a.id %}" style="color: black;">{{a.company_name}} </a></b></td>
                 <td>{{a.user.email}}</td>
                 <td>{{a.contact}}</td>
                 <td>{{a.dateperiod.payment_terms_number}} {{a.dateperiod.payment_terms_value}}</td>

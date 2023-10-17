@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VYAPAR</title>
+  <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/logos/favicon.png' %}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -72,6 +73,11 @@
                     <div class="container-fluid">
                         <form id="form" class="" method="post" action="{% url 'staff_registraction' %}"
                             enctype="multipart/form-data">
+                            {% if messages %}
+                            {% for message in messages %}
+                                <label for="" class="text-center" style="background-color: rgb(255, 0, 0,0.5); width: 100%;color:white;text-shadow: 2px 2px 4px #000000;padding: 10px; border-radius: 10px;">{{message}}</label>
+                            {% endfor %}
+                         {% endif %}
 
 
                             <div class="form-group ">
@@ -107,12 +113,15 @@
                                     placeholder="conform password"  required>
                                 <span id='message' style="margin-top: 0px; padding-top: 0px;"></span><br>
 
-                                <select class="form-control" name="select" id="" style="margin-bottom: 20px;">
+                                <input type="text" id="code" name="code" class="form-control"
+                                    placeholder="enter company code" required><br>
+
+                                <!-- <select class="form-control" name="select" id="" style="margin-bottom: 20px;">
                                     <option value="">select company</option>
                                     {% for d in company %}
                                     <option value="{{d.id}}">{{d.company_name}}</option>
                                     {% endfor %}
-                                </select>
+                                </select> -->
 
                                 <!-- <label for="" style="color: white; font-weight: bold;">Upload Image</label> -->
                                 <input type="file" id="image" name="image" accept="image/*" class="form-control"
