@@ -410,6 +410,11 @@ def addmodules(request,uid):
     data.save()
 
     return redirect('log_page')
+  
+
+
+def companyreport(request):
+  return render(request,'company/companyreport.html')  
 
 
 
