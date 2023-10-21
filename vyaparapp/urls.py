@@ -12,7 +12,7 @@ urlpatterns = [
     
     path('homepage', views.homepage, name='homepage'),
     path('logout', views.logout, name='logout'),
-    path('view_profile', views.view_profile, name='view_profile'),
+    
     path('edit_profile/<pk>', views.edit_profile, name='edit_profile'),
     path('sale_invoices', views.sale_invoices, name='sale_invoices'),
     path('estimate_quotation', views.estimate_quotation, name='estimate_quotation'),
@@ -54,6 +54,7 @@ urlpatterns = [
 
     
     path('companyreport', views.companyreport, name='companyreport'),
+    path('Companyprofile', views.Companyprofile, name='Companyprofile'),
 
 
 

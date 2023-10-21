@@ -414,7 +414,14 @@ def addmodules(request,uid):
 
 
 def companyreport(request):
-  return render(request,'company/companyreport.html')  
+  com =  company.objects.get(user = request.user)
+  allmodules= modules_list.objects.get(company=com.id)
+  return render(request,'company/companyreport.html',{'company':com,'allmodules':allmodules})  
+
+def Companyprofile(request):
+  com =  company.objects.get(user = request.user)
+  allmodules= modules_list.objects.get(company=com.id)
+  return render(request,'company/companyprofile.html',{'company':com,'allmodules':allmodules})
 
 
 

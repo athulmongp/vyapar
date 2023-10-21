@@ -127,7 +127,7 @@
                 </span>
                 <span><b>Sales</b></span>
                 
-                <i class="fa fa-caret-down" style="margin-left: 59%;"></i>
+                <i class="fa fa-caret-down" style="margin-left: 57%;"></i>
               </button>
               <div class="dropdown-container" style="background-color: aliceblue;padding: 20px;justify-content: center;">
                 {% if allmodules.sales_invoice != Null %}
@@ -244,7 +244,7 @@
                 </span>
                 <span><b>Cash & Bank</b></span>
                 
-                <i class="fa fa-caret-down" style="margin-left: 35%;"></i>
+                <i class="fa fa-caret-down" style="margin-left: 30%;"></i>
               </button>
               <div class="dropdown-container" style="background-color: aliceblue;padding: 20px;justify-content: center;">
                 {% if allmodules.Bank_account != Null %}
@@ -326,7 +326,7 @@
 
 
               <li class="nav-item dropdown">
-                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+                <a class="nav-link nav-icon-hover" href="" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   {% if company.profile_pic %}
                   <img width="35" height="35" class="rounded-circle" src="{{ company.profile_pic.url }}" alt="">
@@ -335,13 +335,13 @@
                     class="rounded-circle">
                   {% endif %}
 
-                  <h5 style="font-family: 'Times New Roman', Times, serif;padding-left: 5px;">
+                  <h5 class="h5" style="font-family: 'Times New Roman', Times, serif;padding-left: 5px;">
                     <b>{{company.company_name}}</b></h5>
 
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
-                    <a href="" class="d-flex align-items-center gap-2 dropdown-item">
+                    <a href="{% url 'Companyprofile' %}" class="d-flex align-items-center gap-2 dropdown-item">
                       <i class="ti ti-user fs-6"></i>
                       <p class="mb-0 fs-3">Profile</p>
                     </a>
