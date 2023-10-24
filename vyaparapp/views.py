@@ -423,6 +423,48 @@ def Companyprofile(request):
   allmodules= modules_list.objects.get(company=com.id)
   return render(request,'company/companyprofile.html',{'company':com,'allmodules':allmodules})
 
+def editcompanyprofile(request):
+  com =  company.objects.get(user = request.user)
+  allmodules= modules_list.objects.get(company=com.id)
+  terms=payment_terms.objects.all()
+  return render(request,'company/editcompanyprofile.html',{'company':com,'allmodules':allmodules,'terms':terms})
+
+def editcompanyprofile_action(request):
+  com =  company.objects.get(user = request.user)
+  if request.method == 'POST':
+    com.company_name = request.POST['cname']
+    com.user.email = request.POST['email']
+    com.contact = request.POST['ph']
+    com.address = request.POST['address']
+    com.city = request.POST['city']
+    com.state = request.POST['state']
+    com.country = request.POST['country']
+    com.pincode = request.POST['pincode']
+
+    t = request.POST['select']
+    terms = payment_terms.objects.get(id=t)
+    com.dateperiod = terms
+    com.start_date=date.today()
+    days=int(terms.days)
+
+    end= date.today() + timedelta(days=days)
+    com.End_date=end
+
+    old=com.profile_pic
+    new=request.FILES.get('image')
+    if old!=None and new==None:
+      com.profile_pic=old
+    else:
+      com.profile_pic=new
+    
+    com.save() 
+    com.user.save() 
+    return redirect('Companyprofile') 
+
+
+
+  return redirect('Companyprofile')
+
 
 
 

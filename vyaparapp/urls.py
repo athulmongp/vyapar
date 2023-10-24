@@ -55,6 +55,8 @@ urlpatterns = [
     
     path('companyreport', views.companyreport, name='companyreport'),
     path('Companyprofile', views.Companyprofile, name='Companyprofile'),
+    path('editcompanyprofile', views.editcompanyprofile, name='editcompanyprofile'),
+    path('editcompanyprofile_action', views.editcompanyprofile_action, name='editcompanyprofile_action'),
 
 
 
