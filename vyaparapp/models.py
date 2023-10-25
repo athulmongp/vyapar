@@ -35,7 +35,7 @@ class staff_details(models.Model):
     email = models.CharField(max_length=100,null=True,blank=True)
     user_name = models.CharField(max_length=100,null=True,blank=True)
     password = models.CharField(max_length=100,null=True,blank=True)
-    contact = models.IntegerField(null=True,blank=True)
+    contact = models.CharField(max_length=255,null=True,blank=True)
     img = models.ImageField(null=True,blank = True,upload_to = 'image/staff')    
     Action = models.IntegerField(null=True,default=0)    
 
@@ -57,5 +57,8 @@ class modules_list(models.Model):
     Cash_in_hand = models.IntegerField(null=True,default=0)  
     cheques = models.IntegerField(null=True,default=0)   
     Loan_account = models.IntegerField(null=True,default=0) 
+
+    update_action = models.IntegerField(null=True,default=0) 
+    status = models.CharField(max_length=100,null=True,default='New')  
   
   

@@ -57,6 +57,14 @@ urlpatterns = [
     path('Companyprofile', views.Companyprofile, name='Companyprofile'),
     path('editcompanyprofile', views.editcompanyprofile, name='editcompanyprofile'),
     path('editcompanyprofile_action', views.editcompanyprofile_action, name='editcompanyprofile_action'),
+    path('editmodule', views.editmodule, name='editmodule'),
+    path('editmodule_action', views.editmodule_action, name='editmodule_action'),
+    path('admin_notification', views.admin_notification, name='admin_notification'),
+    path('module_updation_details/<mid>', views.module_updation_details, name='module_updation_details'),
+    path('module_updation_ok/<mid>', views.module_updation_ok, name='module_updation_ok'),
+    path('staff_profile/<sid>', views.staff_profile, name='staff_profile'),
+    path('editstaff_profile/<sid>', views.editstaff_profile, name='editstaff_profile'),
+    path('editstaff_profile_action/<sid>', views.editstaff_profile_action, name='editstaff_profile_action'),
 
 
 

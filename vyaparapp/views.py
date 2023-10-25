@@ -19,7 +19,7 @@ def home(request):
     
 def homepage(request):
   com =  company.objects.get(user = request.user)
-  allmodules= modules_list.objects.get(company=com.id)
+  allmodules= modules_list.objects.get(company=com.id,status='New')
   context = {
               'company' : com,
               'allmodules':allmodules
@@ -28,7 +28,7 @@ def homepage(request):
 
 def staffhome(request,id):
   staff =  staff_details.objects.get(id=id)
-  allmodules= modules_list.objects.get(company=staff.company)
+  allmodules= modules_list.objects.get(company=staff.company,status='New')
   context = {
               'staff' : staff,
               'allmodules':allmodules
@@ -344,14 +344,14 @@ def client_details_overview(request,id):
 def staff_request(request):
   com =  company.objects.get(user = request.user)
   staff = staff_details.objects.filter(company=com,Action=0).order_by('-id')
-  allmodules= modules_list.objects.get(company=com.id)
+  allmodules= modules_list.objects.get(company=com.id,status='New')
   return render(request,'company/staff_request.html',{'staff':staff,'company':com,'allmodules':allmodules}) 
  
 def View_staff(request):
   com =  company.objects.get(user = request.user)
   staff = staff_details.objects.filter(company=com,Action=0)
   allstaff = staff_details.objects.filter(company=com,Action=1).order_by('-id')
-  allmodules= modules_list.objects.get(company=com.id)
+  allmodules= modules_list.objects.get(company=com.id,status='New')
 
   return render(request, 'company/view_staff.html',{'staff':staff,'company':com,'allstaff':allstaff,'allmodules':allmodules})
 
@@ -415,17 +415,17 @@ def addmodules(request,uid):
 
 def companyreport(request):
   com =  company.objects.get(user = request.user)
-  allmodules= modules_list.objects.get(company=com.id)
+  allmodules= modules_list.objects.get(company=com.id,status='New')
   return render(request,'company/companyreport.html',{'company':com,'allmodules':allmodules})  
 
 def Companyprofile(request):
   com =  company.objects.get(user = request.user)
-  allmodules= modules_list.objects.get(company=com.id)
+  allmodules= modules_list.objects.get(company=com.id,status='New')
   return render(request,'company/companyprofile.html',{'company':com,'allmodules':allmodules})
 
 def editcompanyprofile(request):
   com =  company.objects.get(user = request.user)
-  allmodules= modules_list.objects.get(company=com.id)
+  allmodules= modules_list.objects.get(company=com.id,status='New')
   terms=payment_terms.objects.all()
   return render(request,'company/editcompanyprofile.html',{'company':com,'allmodules':allmodules,'terms':terms})
 
@@ -464,6 +464,111 @@ def editcompanyprofile_action(request):
 
 
   return redirect('Companyprofile')
+
+def editmodule(request):
+  com =  company.objects.get(user = request.user)
+  allmodules= modules_list.objects.get(company=com.id,status='New')
+  return render(request,'company/editmodule.html',{'company':com,'allmodules':allmodules})
+
+def editmodule_action(request):
+  if request.method == 'POST':
+    com = company.objects.get(user = request.user)
+    if modules_list.objects.filter(company=com.id,status='Old').exists():
+      old=modules_list.objects.filter(company=com.id,status='Old')
+      old.delete()
+
+    old_data=modules_list.objects.get(company=com.id,status='New')  
+    old_data.status='Old'
+    old_data.save()
+
+
+
+    c1=request.POST.get('c1')
+    c2=request.POST.get('c2')
+    c3=request.POST.get('c3')
+    c4=request.POST.get('c4')
+    c5=request.POST.get('c5')
+    c6=request.POST.get('c6')
+    c7=request.POST.get('c7')
+    c8=request.POST.get('c8')
+    c9=request.POST.get('c9')
+    c10=request.POST.get('c10')
+    c11=request.POST.get('c11')
+    c12=request.POST.get('c12')
+    c13=request.POST.get('c13')
+    c14=request.POST.get('c14')
+    
+    data=modules_list(company=com,sales_invoice = c1,
+                      Estimate=c2,Payment_in=c3,sales_order=c4,
+                      Delivery_challan=c5,sales_return=c6,Purchase_bills=c7,
+                      Payment_out=c8,Purchase_order=c9,Purchase_return=c10,
+                      Bank_account=c11,Cash_in_hand=c12, cheques=c13,Loan_account=c14)
+    data.save()
+    data1=modules_list.objects.filter(company=com.id,status='New').update(update_action=1)
+    return redirect('Companyprofile')
+    
+    
+  return redirect('Companyprofile')
+
+def admin_notification(request):
+  data= modules_list.objects.filter(update_action=1,status='New')
+
+  return render(request,'admin/admin_notification.html',{'data':data})
+
+def module_updation_details(request,mid):
+  data= modules_list.objects.get(id=mid)
+  allmodules= modules_list.objects.get(company=data.company,status='New')
+  old_modules = modules_list.objects.get(company=data.company,status='Old')
+
+  return render(request,'admin/module_updation_details.html',{'data':data,'allmodules':allmodules,'old_modules':old_modules})
+
+def module_updation_ok(request,mid):
+  data1=modules_list.objects.filter(id=mid).update(update_action=0)
+  return redirect('admin_notification')
+
+def staff_profile(request,sid):
+  staff =  staff_details.objects.get(id=sid)
+  allmodules= modules_list.objects.get(company=staff.company,status='New')
+  context = {
+              'staff' : staff,
+              'allmodules':allmodules
+
+          }
+  return render(request,'staff/staff_profile.html',context)
+
+def editstaff_profile(request,sid):
+  staff =  staff_details.objects.get(id=sid)
+  allmodules= modules_list.objects.get(company=staff.company,status='New')
+  context = {
+              'staff' : staff,
+              'allmodules':allmodules
+
+          }
+  return render(request,'staff/editstaff_profile.html',context)
+
+def editstaff_profile_action(request,sid):
+  if request.method == 'POST':
+    staff =  staff_details.objects.get(id=sid)
+    staff.first_name = request.POST['fname']
+    staff.last_name = request.POST['lname']
+    staff.user_name = request.POST['uname']
+    staff.email = request.POST['email']
+    staff.contact = request.POST['ph']
+    old=staff.img
+    new=request.FILES.get('image')
+    if old!=None and new==None:
+      staff.img=old
+    else:
+      staff.img=new
+
+    staff.save()  
+
+    return redirect ('staff_profile',staff.id)
+  return redirect ('staff_profile',staff.id)
+
+
+
+
 
 
 
