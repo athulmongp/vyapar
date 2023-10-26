@@ -473,13 +473,13 @@ def editmodule(request):
 def editmodule_action(request):
   if request.method == 'POST':
     com = company.objects.get(user = request.user)
-    if modules_list.objects.filter(company=com.id,status='Old').exists():
-      old=modules_list.objects.filter(company=com.id,status='Old')
-      old.delete()
+    # if modules_list.objects.filter(company=com.id,status='Old').exists():
+    #   old=modules_list.objects.filter(company=com.id,status='Old')
+    #   old.delete()
 
-    old_data=modules_list.objects.get(company=com.id,status='New')  
-    old_data.status='Old'
-    old_data.save()
+    # old_data=modules_list.objects.get(company=com.id,status='New')  
+    # old_data.status='Old'
+    # old_data.save()
 
 
 
@@ -502,28 +502,35 @@ def editmodule_action(request):
                       Estimate=c2,Payment_in=c3,sales_order=c4,
                       Delivery_challan=c5,sales_return=c6,Purchase_bills=c7,
                       Payment_out=c8,Purchase_order=c9,Purchase_return=c10,
-                      Bank_account=c11,Cash_in_hand=c12, cheques=c13,Loan_account=c14)
+                      Bank_account=c11,Cash_in_hand=c12, cheques=c13,Loan_account=c14,status='Pending')
     data.save()
-    data1=modules_list.objects.filter(company=com.id,status='New').update(update_action=1)
+    data1=modules_list.objects.filter(company=com.id,status='Pending').update(update_action=1)
     return redirect('Companyprofile')
     
     
   return redirect('Companyprofile')
 
 def admin_notification(request):
-  data= modules_list.objects.filter(update_action=1,status='New')
+  data= modules_list.objects.filter(update_action=1,status='Pending')
 
   return render(request,'admin/admin_notification.html',{'data':data})
 
 def module_updation_details(request,mid):
   data= modules_list.objects.get(id=mid)
-  allmodules= modules_list.objects.get(company=data.company,status='New')
-  old_modules = modules_list.objects.get(company=data.company,status='Old')
+  allmodules= modules_list.objects.get(company=data.company,status='Pending')
+  old_modules = modules_list.objects.get(company=data.company,status='New')
 
   return render(request,'admin/module_updation_details.html',{'data':data,'allmodules':allmodules,'old_modules':old_modules})
 
 def module_updation_ok(request,mid):
-  data1=modules_list.objects.filter(id=mid).update(update_action=0)
+  
+  old=modules_list.objects.get(company=mid,status='New')
+  old.delete()
+
+  data=modules_list.objects.get(company=mid,status='Pending')  
+  data.status='New'
+  data.save()
+  data1=modules_list.objects.filter(company=mid).update(update_action=0)
   return redirect('admin_notification')
 
 def staff_profile(request,sid):
