@@ -472,6 +472,18 @@
                                 <input type="password" id="cpass" name="cpass" class="form-control"
                                     placeholder="confirm password"  required>
                                 <span id='message' style="margin-top: 0px; padding-top: 0px;"></span><br>
+                                <label for="" class="pb-4 pt-3"><b><u>How do you Register.??</u></b></label>    
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <input type="radio" name="r" id="distributor" value="distributor" onclick="show()" required>
+                                        <label for=""><b>By The Distributor</b></label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="radio" name="r" id="self" value="self" onclick="show2()" required>
+                                        <label for=""><b>By Self</b></label>
+                                    </div>
+                                </div>
+                                <input type="text" id="did" name="did" style="display: none;" class="form-control" placeholder="enter distributor id">
 
                                 
 
@@ -504,6 +516,17 @@
             } else
                 $('#message').html('Password Is Not Matching').css('color', 'red');
         });
+
+        function show() {
+        document.getElementById('did').style.display = 'block';
+   
+
+    }
+    function show2() {
+        document.getElementById('did').style.display = 'none';
+   
+
+    }
     </script>
 </body>
 

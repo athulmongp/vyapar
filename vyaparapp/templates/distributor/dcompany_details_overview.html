@@ -1,11 +1,9 @@
-<!-- create by athul -->
-{% extends 'admin/adminbase.html' %}
+{% extends 'distributor/distributor_base.html' %}
 
 {% block content %}
 {% load static %}
-
 <style>
-     @media (max-width:768px) {
+    @media (max-width:768px) {
         .h3{
             font-size: 20px;
         }
@@ -14,6 +12,7 @@
         }
     }
 </style>
+
 <body style="background-color: rgba(176, 199, 205, 0.4);">
     <div class="body-wrapper">
         <div class="container-fluid">
@@ -38,7 +37,7 @@
                         <h5 class="h5"><b style="margin-right: 10px;">-> </b>Company Owner </h5>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="h4 "><b>: {{company.user.first_name}} {{company.user.last_name}}</b></h4>
+                        <h4 class="h4"><b>: {{company.user.first_name}} {{company.user.last_name}}</b></h4>
                     </div>
                 </div>
                 <div class="row p-5 pb-3 pt-3">
@@ -46,7 +45,7 @@
                         <h5 class="h5"><b style="margin-right: 10px;">-> </b>Company Code </h5>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="h4 "><b>: {{company.Company_code}}</b></h4>
+                        <h4 class="h4"><b>: {{company.Company_code}}</b></h4>
                     </div>
                 </div>
 
@@ -224,13 +223,11 @@
                     </div>
                     <div class="col"></div>
                 </div>
+                
                 <center>
                     <a href="" class="btn btn-danger mb-5"  style="width: 30%;"><b>Cancel Contract</b></a>
                 </center>
-                
-                        
-                    
-                </div>
+                   
 
 
 

@@ -9,8 +9,20 @@ class payment_terms(models.Model):
     payment_terms_value = models.CharField(max_length=100,null=True,blank=True) 
     days = models.CharField(max_length=100,null=True,blank=True) 
 
+
+class Distributors_details(models.Model):  
+  user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
+  distributor_id = models.CharField(max_length=100,null=True,blank=True)
+  contact = models.CharField(max_length=255,null=True,blank=True)
+  img = models.ImageField(null=True,blank = True,upload_to = 'image/distributor') 
+  payment_term =  models.ForeignKey(payment_terms, on_delete=models.CASCADE,null=True,blank=True)
+  start_date = models.DateField(max_length=255,null=True,blank=True)
+  End_date = models.DateField(max_length=255,null=True,blank=True)
+  Log_Action = models.IntegerField(null=True,default=0)
+
 class company(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
+    Distributors = models.ForeignKey(Distributors_details, on_delete=models.CASCADE,null=True,blank=True)
     Company_code = models.CharField(max_length=100,null=True,blank=True)
     company_name = models.CharField(max_length=100,null=True,blank=True)
     address = models.CharField(max_length=100,null=True,blank=True)
@@ -26,7 +38,10 @@ class company(models.Model):
     gst_type = models.CharField(max_length=255,null=True,blank=True)
     gst_no = models.CharField(max_length=255,null=True,blank=True)
     profile_pic = models.ImageField(null=True,blank = True,upload_to = 'image/patient')
-    Action = models.IntegerField(null=True,default=0) 
+    superadmin_approval = models.IntegerField(null=True,default=0)  
+    Distributor_approval = models.IntegerField(null=True,default=0) 
+    reg_action = models.CharField(max_length=255,null=True,blank=True,default='self')
+    
 
 class staff_details(models.Model):
     company = models.ForeignKey(company, on_delete=models.CASCADE,null=True,blank=True)
@@ -59,6 +74,4 @@ class modules_list(models.Model):
     Loan_account = models.IntegerField(null=True,default=0) 
 
     update_action = models.IntegerField(null=True,default=0) 
-    status = models.CharField(max_length=100,null=True,default='New')  
-  
-  
+    status = models.CharField(max_length=100,null=True,default='New')      

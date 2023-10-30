@@ -154,6 +154,10 @@ def register(request):
     mobile = request.POST['ph']
     passw = request.POST['pass']
     c_passw = request.POST['cpass']
+    action = request.POST['r']
+    did = request.POST['did']
+    distributor = Distributors_details.objects.get(distributor_id=did)
+
     
     if passw == c_passw:
       if User.objects.filter(username = user_name).exists():
@@ -172,7 +176,7 @@ def register(request):
         
         data = User.objects.get(id = user_data.id)
         cust_data = company( contact=mobile,
-                             user = data)
+                             user = data,reg_action=action,Distributors=distributor)
         cust_data.save()
         
         return redirect('company_reg2')
@@ -268,42 +272,9 @@ def staff_registraction(request):
     print(" error")
     return redirect('staff_register')
   
-def log_page(request):
-  return render(request, 'log.html')
-  
-def login(request):
-  if request.method == 'POST':
-    user_name = request.POST['username']
-    passw = request.POST['password']
-    
-    log_user = auth.authenticate(username = user_name,
-                                  password = passw)
-    
-    if log_user is not None:
-      auth.login(request, log_user)
-      if request.user.is_staff==1:
-        return redirect('adminhome')
-      else:
-        data=company.objects.get(user=request.user)
-        if data.Action == 1:
-          return redirect('homepage')
-        else:
-          messages.info(request, 'Approval is Pending..')
-          return redirect('log_page')
 
-    elif staff_details.objects.filter(user_name=user_name,password=passw).exists(): 
-      data=staff_details.objects.get(user_name=user_name,password=passw)
-      if data.Action == 1:
-        return redirect('staffhome',data.id)  
-      else:
-        messages.info(request, 'Approval is Pending..')
-        return redirect('log_page')
-
-    else:
-      messages.info(request, 'Invalid Username or Password. Try Again.')
-      return redirect('log_page')
 def adminaccept(request,id):
-  data=company.objects.filter(id=id).update(Action=1)
+  data=company.objects.filter(id=id).update(superadmin_approval=1)
   return redirect('client_request')
 def adminreject(request,id):
   data=company.objects.get(id=id)
@@ -324,8 +295,9 @@ def companyreject(request,id):
   return redirect('staff_request')
 
 def client_request(request):
-  data = company.objects.filter(Action = 0).order_by('-id')
-  all = company.objects.filter(Action = 1)
+  data = company.objects.filter(superadmin_approval = 0,reg_action='self').order_by('-id')
+  
+  all = company.objects.filter(superadmin_approval = 1)
   return render(request,'admin/client_request.html',{'data': data,'all':all})
 
 def client_request_overview(request,id): 
@@ -334,7 +306,7 @@ def client_request_overview(request,id):
   return render(request,'admin/client_request_overview.html',{'company':com,'allmodules':allmodules})
 
 def client_details(request):
-  data = company.objects.filter(Action = 1).order_by('-id')
+  data = company.objects.filter(superadmin_approval = 1,reg_action='self').order_by('-id')
   return render(request,'admin/client_details.html',{"data":data})
 def client_details_overview(request,id): 
   com = company.objects.get(id=id)
@@ -572,6 +544,178 @@ def editstaff_profile_action(request,sid):
 
     return redirect ('staff_profile',staff.id)
   return redirect ('staff_profile',staff.id)
+
+
+
+
+def distributor_reg(request):
+  terms=payment_terms.objects.all()
+  return render(request,'distributor/distributor_reg.html',{'terms':terms})
+def distributor_reg_action(request):
+  if request.method == 'POST':
+    first_name = request.POST['fname']
+    last_name = request.POST['lname']
+    user_name = request.POST['uname']
+    email_id = request.POST['eid']
+    mobile = request.POST['ph']
+    passw = request.POST['pass']
+    c_passw = request.POST['cpass']
+    pic = request.FILES.get('image')
+
+    select=request.POST['select']
+    terms=payment_terms.objects.get(id=select)
+    # c.dateperiod=terms
+    start_date=date.today()
+    days=int(terms.days)
+
+    
+    end= date.today() + timedelta(days=days)
+    End_date=end
+
+    code=get_random_string(length=6)
+    if Distributors_details.objects.filter(distributor_id = code).exists():
+       code=get_random_string(length=6)
+  
+    if passw == c_passw:
+      if User.objects.filter(username = user_name).exists():
+        messages.info(request, 'Sorry, Username already exists')
+        return redirect('distributor_reg')
+      
+
+      elif not User.objects.filter(email = email_id).exists():
+    
+        user_data = User.objects.create_user(first_name = first_name,
+                        last_name = last_name,
+                        username = user_name,
+                        email = email_id,
+                        password = passw)
+        user_data.save()
+        
+        data = User.objects.get(id = user_data.id)
+        distributor_data = Distributors_details(contact=mobile,distributor_id=code,img=pic,
+                                                payment_term=terms,start_date=start_date,End_date=End_date,
+                                                user = data)
+        distributor_data.save()
+        
+        return redirect('log_page')
+      else:
+        messages.info(request, 'Sorry, Email already exists')
+        return redirect('distributor_reg')
+  return render(request,'distributor/distributor_reg.html')
+ 
+def distributor_home(request):
+  distributor =  Distributors_details.objects.get(user = request.user)
+
+  return render(request,'distributor/distributor_home.html',{'distributor':distributor})
+
+def log_page(request):
+  return render(request, 'log.html')
+  
+def login(request):
+  if request.method == 'POST':
+    user_name = request.POST['username']
+    passw = request.POST['password']
+    
+    log_user = auth.authenticate(username = user_name,
+                                  password = passw)
+    
+    if log_user is not None:
+      auth.login(request, log_user)
+      if request.user.is_staff==1:
+        return redirect('adminhome')
+      else:
+        if company.objects.filter(user=request.user).exists():
+          data=company.objects.get(user=request.user)
+          if data.superadmin_approval == 1 or data.Distributor_approval == 1:
+             return redirect('homepage')
+          else:
+            messages.info(request, 'Approval is Pending..')
+            return redirect('log_page')
+        if Distributors_details.objects.filter(user=request.user).exists():
+          data=Distributors_details.objects.get(user=request.user)
+          if data.Log_Action == 1:
+            return redirect('distributor_home')
+
+          else:
+            messages.info(request, 'Approval is Pending..')
+            return redirect('log_page')
+
+
+    elif staff_details.objects.filter(user_name=user_name,password=passw).exists(): 
+      data=staff_details.objects.get(user_name=user_name,password=passw)
+      if data.Action == 1:
+        return redirect('staffhome',data.id)  
+      else:
+        messages.info(request, 'Approval is Pending..')
+        return redirect('log_page')
+    else:
+      messages.info(request, 'Invalid Username or Password. Try Again.')
+      return redirect('log_page')
+    
+def clients(request):
+  return render(request,'admin/clients.html')
+
+def distributors(request):
+  return render(request,'admin/distributors.html')  
+
+def distributor_request(request):
+  data = Distributors_details.objects.filter(Log_Action = 0).order_by('-id')
+  return render(request,'admin/distributor_request.html',{'data':data})
+
+def admin_distributor_accept(request,id):
+  data=Distributors_details.objects.filter(id=id).update(Log_Action=1)
+  return redirect('distributor_request')
+def admin_distributor_reject(request,id):
+  data=Distributors_details.objects.get(id=id)
+  data.user.delete()
+  data.delete()
+  return redirect('distributor_request')
+
+def distributor_request_overview(request,id):
+  data=Distributors_details.objects.get(id=id)
+  return render(request,'admin/distributor_request_overview.html',{'data':data})
+
+def distributor_details(request):
+  data = Distributors_details.objects.filter(Log_Action = 1).order_by('-id')
+  return render(request,'admin/distributor_details.html',{'data':data})
+
+def distributor_details_overview(request,id):
+  data = Distributors_details.objects.get(id=id)
+  return render(request,'admin/distributor_details_overview.html',{'data':data})
+
+def dcompany_request(request):
+  data = company.objects.filter(Distributor_approval = 0,reg_action='distributor').order_by('-id')
+  distributor =  Distributors_details.objects.get(user = request.user)
+  return render(request,'distributor/dcompany_request.html',{'data':data,'distributor':distributor})
+
+def dcompany_request_overview(request,id):
+  com = company.objects.get(id=id)
+  allmodules=modules_list.objects.get(company=id)
+  distributor =  Distributors_details.objects.get(user = request.user)
+  return render(request,'distributor/dcompany_request_overview.html',{'company':com,'allmodules':allmodules,'distributor':distributor})
+
+def distributor_accept_company(request,id):
+  data=company.objects.filter(id=id).update(Distributor_approval=1)
+  
+  return redirect('dcompany_request')
+def distributor_reject_company(request,id):
+  data=company.objects.get(id=id)
+  data.user.delete()
+  data.delete()
+  return redirect('dcompany_request')
+
+def dcompany_details(request):
+  data = company.objects.filter(Distributor_approval = 1,reg_action='distributor').order_by('-id')
+  distributor =  Distributors_details.objects.get(user = request.user)
+  return render(request,'distributor/dcompany_details.html',{'data':data,'distributor':distributor})
+
+def dcompany_details_overview(request,id):
+  com = company.objects.get(id=id)
+  allmodules=modules_list.objects.get(company=id)
+  distributor =  Distributors_details.objects.get(user = request.user)
+  return render(request,'distributor/dcompany_details_overview.html',{'company':com,'allmodules':allmodules,'distributor':distributor})
+
+
 
 
 

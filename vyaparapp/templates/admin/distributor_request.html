@@ -1,6 +1,6 @@
 <!-- create by athul -->
 
-{% extends 'admin/adminbase.html' %}
+{% extends 'distributor/distributor_base.html' %}
 
 {% block content %}
 {% load static %}
@@ -25,7 +25,7 @@
             <thead>
               <tr>
                 <th scope="col" style="color: black;"><b>ID</b></th>
-                <th scope="col" style="color: black;"><b>Company Name</b></th>
+                <th scope="col" style="color: black;"><b>Name</b></th>
                 <th scope="col" style="color: black;"><b>Email</b></th>
                 
                 <th scope="col" style="color: black;"><b>Contact</b></th>
@@ -39,13 +39,13 @@
                 {% for a in data %}
               <tr>
                 <td>{{a.id}}</th>
-                <td> <b><a href="{% url 'client_request_overview' a.id %}" style="color: black;">{{a.company_name}} </a></b></td>
+                <td> <b><a href="{% url 'distributor_request_overview' a.id %}" style="color: black;">{{a.user.first_name}} </a></b></td>
                 <td>{{a.user.email}}</td>
                 <td>{{a.contact}}</td>
-                <td>{{a.dateperiod.payment_terms_number}} {{a.dateperiod.payment_terms_value}}</td>
+                <td>{{a.payment_term.payment_terms_number}} {{a.payment_term.payment_terms_value}}</td>
                 <td>{{a.End_date}}</td>
-                <td><a href="{% url 'adminaccept' a.id %}" class="btn btn-primary m-1">Accept</a>
-                <a href="{% url 'adminreject' a.id %}" class="btn btn-danger m-1">Reject</a></td>
+                <td><a href="{% url 'admin_distributor_accept' a.id %}" class="btn btn-primary m-1">Accept</a>
+                <a href="{% url 'admin_distributor_reject' a.id %}" class="btn btn-danger m-1">Reject</a></td>
               </tr>
               {% endfor %}
             </tbody>

@@ -66,6 +66,24 @@ urlpatterns = [
     path('editstaff_profile/<sid>', views.editstaff_profile, name='editstaff_profile'),
     path('editstaff_profile_action/<sid>', views.editstaff_profile_action, name='editstaff_profile_action'),
 
+    path('distributor_home', views.distributor_home, name='distributor_home'),
+    path('distributor_reg', views.distributor_reg, name='distributor_reg'),
+    path('distributor_reg_action', views.distributor_reg_action, name='distributor_reg_action'),
+    path('distributors', views.distributors, name='distributors'),
+    path('clients', views.clients, name='clients'),
+    path('distributor_request', views.distributor_request, name='distributor_request'),
+    path('admin_distributor_accept/<id>', views.admin_distributor_accept, name='admin_distributor_accept'),
+    path('admin_distributor_reject/<id>', views.admin_distributor_reject, name='admin_distributor_reject'),
+    path('distributor_request_overview/<id>', views.distributor_request_overview, name='distributor_request_overview'),
+    path('distributor_details', views.distributor_details, name='distributor_details'),
+    path('distributor_details_overview/<id>', views.distributor_details_overview, name='distributor_details_overview'),
+    path('dcompany_request', views.dcompany_request, name='dcompany_request'),
+    path('dcompany_details', views.dcompany_details, name='dcompany_details'),
+    path('dcompany_request_overview/<id>', views.dcompany_request_overview, name='dcompany_request_overview'),
+    path('distributor_accept_company/<id>', views.distributor_accept_company, name='distributor_accept_company'),
+    path('distributor_reject_company/<id>', views.distributor_reject_company, name='distributor_reject_company'),
+    path('dcompany_details_overview/<id>', views.dcompany_details_overview, name='dcompany_details_overview'),
+
 
 
     
