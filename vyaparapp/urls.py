@@ -83,6 +83,7 @@ urlpatterns = [
     path('distributor_accept_company/<id>', views.distributor_accept_company, name='distributor_accept_company'),
     path('distributor_reject_company/<id>', views.distributor_reject_company, name='distributor_reject_company'),
     path('dcompany_details_overview/<id>', views.dcompany_details_overview, name='dcompany_details_overview'),
+    path('distributor_profile', views.distributor_profile, name='distributor_profile'),
 
 
 

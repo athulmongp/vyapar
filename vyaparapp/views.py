@@ -156,7 +156,13 @@ def register(request):
     c_passw = request.POST['cpass']
     action = request.POST['r']
     did = request.POST['did']
-    distributor = Distributors_details.objects.get(distributor_id=did)
+    if did != '':
+      if Distributors_details.objects.filter(distributor_id=did).exists():
+        distributor = Distributors_details.objects.get(distributor_id=did)
+      else :
+          messages.info(request, 'Sorry, distributor id does not exists')
+          return redirect('company_reg')
+    
 
     
     if passw == c_passw:
@@ -166,20 +172,27 @@ def register(request):
       
 
       elif not User.objects.filter(email = email_id).exists():
-    
+        
         user_data = User.objects.create_user(first_name = first_name,
                         last_name = last_name,
                         username = user_name,
                         email = email_id,
                         password = passw)
         user_data.save()
-        
-        data = User.objects.get(id = user_data.id)
-        cust_data = company( contact=mobile,
+        if did != '':
+          data = User.objects.get(id = user_data.id)
+          cust_data = company( contact=mobile,
                              user = data,reg_action=action,Distributors=distributor)
-        cust_data.save()
+          cust_data.save()
         
-        return redirect('company_reg2')
+          return redirect('company_reg2')
+        else:
+          data = User.objects.get(id = user_data.id)
+          cust_data = company( contact=mobile,
+                             user = data,reg_action=action)
+          cust_data.save()
+        
+          return redirect('company_reg2')
       else:
         messages.info(request, 'Sorry, Email already exists')
         return redirect('company_reg')
@@ -684,8 +697,9 @@ def distributor_details_overview(request,id):
   return render(request,'admin/distributor_details_overview.html',{'data':data})
 
 def dcompany_request(request):
-  data = company.objects.filter(Distributor_approval = 0,reg_action='distributor').order_by('-id')
+  
   distributor =  Distributors_details.objects.get(user = request.user)
+  data = company.objects.filter(Distributors = distributor,Distributor_approval = 0,reg_action='distributor').order_by('-id')
   return render(request,'distributor/dcompany_request.html',{'data':data,'distributor':distributor})
 
 def dcompany_request_overview(request,id):
@@ -705,8 +719,9 @@ def distributor_reject_company(request,id):
   return redirect('dcompany_request')
 
 def dcompany_details(request):
-  data = company.objects.filter(Distributor_approval = 1,reg_action='distributor').order_by('-id')
   distributor =  Distributors_details.objects.get(user = request.user)
+  data = company.objects.filter(Distributors = distributor,Distributor_approval = 1,reg_action='distributor').order_by('-id')
+  
   return render(request,'distributor/dcompany_details.html',{'data':data,'distributor':distributor})
 
 def dcompany_details_overview(request,id):
@@ -714,6 +729,10 @@ def dcompany_details_overview(request,id):
   allmodules=modules_list.objects.get(company=id)
   distributor =  Distributors_details.objects.get(user = request.user)
   return render(request,'distributor/dcompany_details_overview.html',{'company':com,'allmodules':allmodules,'distributor':distributor})
+
+def distributor_profile(request):
+  distributor =  Distributors_details.objects.get(user = request.user)
+  return render(request,'distributor/distributor_profile.html',{'distributor':distributor})
 
 
 
